@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <mo-scrollbar />
+    <mo-scrollbar class="scrollbar">
+      <div>
+        <p style="text-align: center; margin-bottom: 10px;" v-for="(item, index) in 30" :key="index"> {{ index + 1 }}</p>
+      </div>
+    </mo-scrollbar>
   </div>
 </template>
 
@@ -14,3 +18,10 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.scrollbar {
+  width: 500px;
+  height: 500px;
+}
+</style>
