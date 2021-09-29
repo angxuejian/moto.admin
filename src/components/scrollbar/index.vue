@@ -1,37 +1,60 @@
 <template>
   <div class='mo-scrollbar'>
-    <div :style="`margin-right:${marginWidth}px; margin-bottom: ${marginWidth}px;`" ref='wrap' class="mo-scrollbar-wrap">
+    <div
+    :style="wrapStyle"
+    ref='wrap'
+    :class="[
+    'mo-scrollbar__wrap',
+    { 'mo-scrollbar__wrap-y': scrollY },
+    { 'mo-scrollbar__wrap-x': scrollX } ]">
+
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
+import getScollbarWidth from '@/utils/scrollbar-width'
 export default {
   name: 'Scrollbar',
   props: {
-
+    scrollY: {
+      type: Boolean,
+      default() {
+        return false
+      },
+    },
+    scrollX: {
+      type: Boolean,
+      default() {
+        return false
+      },
+    },
   },
   data() {
     return {
-      marginWidth: 0, // margin-right, bottom 的偏移量
+      wrapStyle: 0, // wrap标签的样式
       scollbarWidth: 0, // 滚动条宽度
     }
   },
   created() {
   },
   mounted() {
-    this.marginWidth = this.getScollbarWidth()
+    // this.getWrapStyle()
   },
+
   methods: {
-    getScollbarWidth: function() {
-      if (this.scollbarWidth) return this.scollbarWidth
-      else {
-        if (!this.$refs.wrap.children[0]) return 0
-        else {
-          return this.$refs.wrap.children[0].offsetWidth - this.$refs.wrap.offsetWidth
-        }
-      }
+
+    /**
+     * 隐藏 x、y轴滚动条
+     */
+    getWrapStyle() {
+      const width = getScollbarWidth()
+
+      this.wrapStyle = `
+        margin-right:${width}px; 
+        margin-bottom: ${width}px; 
+        padding-bottom: ${Math.abs(width)}px`
     },
   },
 }
@@ -40,9 +63,19 @@ export default {
 <style lang="scss" scoped>
 .mo-scrollbar {
   overflow: hidden;
-  .mo-scrollbar-wrap {
-    overflow: scroll;
+  .mo-scrollbar__wrap {
     height: 100%;
+    overflow: scroll;
+  }
+
+  .mo-scrollbar__wrap-y {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .mo-scrollbar__wrap-x {
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
 }
 </style>
