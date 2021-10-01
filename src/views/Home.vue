@@ -9,8 +9,14 @@
 </template>
 
 <script>
+import { getUserList } from '@/api/user'
 export default {
   name: 'Home',
+  created() {
+    getUserList().then(res => {
+      console.log(res.result, '---')
+    })
+  },
   methods: {
     getList: function() {
 
