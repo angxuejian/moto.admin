@@ -9,26 +9,27 @@
 </template>
 
 <script>
-import { getUserList } from '@/api/user'
 export default {
   name: 'Home',
   created() {
-    getUserList().then(res => {
-      console.log(res.result, '---')
-    })
   },
   methods: {
-    getList: function() {
-
-    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // padding-bottom: 150px;
+}
 .scrollbar {
   width: 500px;
   height: 500px;
+  border: 1px solid red;
+  // margin-top: 150px;
 }
 .items {
   display: flex;

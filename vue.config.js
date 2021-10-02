@@ -1,9 +1,3 @@
-// const path = require('path')
-// const getPath = file => {
-//   return path.resolve(__dirname, file)
-// }
-
-// const userMock = require('webpack-api-mocker')
 
 module.exports = {
 
@@ -15,16 +9,7 @@ module.exports = {
 
   // 配置跨越代理
   devServer: {
-    // proxy: {
-    //   '/api': {
-    //     target: 'https://www.baidu.com',
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/api': '',
-    //     },
-    //   },
-    // },
-    hot: true,
+    open: true,
     before: require('./src/mock/main'),
   },
 
