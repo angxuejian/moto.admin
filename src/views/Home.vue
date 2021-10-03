@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <mo-scrollbar class="scrollbar">
-      <div class="items">
-        <div class="item" v-for="(item, index) in 30" :key="index"> {{ index + 1 }}</div>
+    <mo-scrollbar scroll-y class="scrollbar">
+      <div ref='items' class="items">
+        <div class="item" v-for="(item, index) in 320" :key="index"> {{ index + 1 }}</div>
       </div>
     </mo-scrollbar>
   </div>
@@ -12,6 +12,8 @@
 export default {
   name: 'Home',
   created() {
+  },
+  mounted() {
   },
   methods: {
   },
@@ -23,25 +25,23 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  // padding-bottom: 150px;
+  height: 500px;
+  width: 500px;
+  // background: red;
 }
 .scrollbar {
-  width: 500px;
-  height: 500px;
+  height: 100%;
+  width: 100%;
   border: 1px solid red;
-  // margin-top: 150px;
 }
 .items {
-  display: flex;
-  height: 1000px;
   background: f5f5f5;
   .item {
     display: block;
     text-align: center;
-    width: 200px;
-    // background: seagreen;
-    padding-top: 10px;
-    margin: 0 50px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
   }
 }
 
