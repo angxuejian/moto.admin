@@ -11,12 +11,6 @@
 <script>
 export default {
   name: 'Home',
-  created() {
-  },
-  mounted() {
-  },
-  methods: {
-  },
 }
 </script>
 
@@ -27,7 +21,6 @@ export default {
   justify-content: center;
   height: 500px;
   width: 500px;
-  // background: red;
 }
 .scrollbar {
   height: 100%;

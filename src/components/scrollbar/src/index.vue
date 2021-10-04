@@ -77,8 +77,6 @@ export default {
       isScroll     : false, // 是否同时显示 x 和 y 轴
     }
   },
-  created() {
-  },
   mounted() {
     this.init()
     addResize(this.$refs.reszie, this.getWrapSize)
@@ -87,14 +85,14 @@ export default {
     removeResize(this.$refs.reszie, this.getWrapSize)
   },
   watch: {
-    default() {
-      this.init()
-    },
+    default() { this.init() },
+    scrollY() { this.init() },
+    scrollX() { this.init() },
   },
 
   methods: {
     init: function() {
-      if (!this.scrollY && !this.scrollX) this.isScroll = true
+      this.isScroll = (!this.scrollY && !this.scrollX)
       this.getWrapStyle()
       if (!this.default) {
         this.getWrapSize()
@@ -149,7 +147,7 @@ export default {
       if (this.mouseType === 'y') this.y = this.$refs.bary.offsetHeight / 2 // 模拟滑动距离
       else if (this.mouseType === 'x') this.x = this.$refs.bary.offsetWidth / 2 // 模拟滑动距离
 
-      this.clearScrollType(event)
+      this.clearScrollType(event, true)
     },
 
     onMousedown: function(event) {
@@ -187,12 +185,12 @@ export default {
     // ----------------------------------------------
     // ----------------------------------------------
 
-    clearScrollType: function(event) {
-      if (this.mouseType === 'y') this.getScrollTop(event.clientY)
-      else if (this.mouseType === 'x') this.getScrollLeft(event.clientX)
+    clearScrollType: function(event, isReturn) {
+      if (this.mouseType === 'y') this.getScrollTop(event.clientY, isReturn)
+      else if (this.mouseType === 'x') this.getScrollLeft(event.clientX, isReturn)
     },
 
-    getScrollTop: function(clientY) {
+    getScrollTop: function(clientY, isReturn = false) {
       const d = {
         boxBB      : getClientTop(this.$refs.barbcy).top,
         itemClienBB: clientY,
@@ -201,10 +199,13 @@ export default {
         boxScrollBB: this.$refs.wrap.scrollHeight,
       }
 
-      this.$refs.wrap.scrollTop = getScrollBB(d)
+      const value = getScrollBB(d)
+
+      if (!isReturn) this.$refs.wrap.scrollTop = value
+      else this.setScrollBB(value, 'scrollTop')
     },
 
-    getScrollLeft: function(clientX) {
+    getScrollLeft: function(clientX, isReturn = false) {
       const d = {
         boxBB      : getClientTop(this.$refs.barbcx).left,
         itemClienBB: clientX,
@@ -212,7 +213,25 @@ export default {
         boxBarBB   : this.$refs.barbcx.offsetWidth,
         boxScrollBB: this.$refs.wrap.scrollWidth,
       }
-      this.$refs.wrap.scrollLeft = getScrollBB(d)
+
+      const value = getScrollBB(d)
+
+      if (!isReturn) this.$refs.wrap.scrollLeft = value
+      else this.setScrollBB(value, 'scrollLeft')
+    },
+
+    setScrollBB: function(value, key) {
+      const length = 10
+      const speed  = Math.ceil((value - this.$refs.wrap[key]) / length)
+      let index = 0
+      const setAnTime = window.requestAnimationFrame || (fn => setTimeout(fn, 10))
+      const setScroll = () => {
+        this.$refs.wrap[key] += speed
+
+        if (index < length) setAnTime(setScroll)
+        index += 1
+      }
+      setAnTime(setScroll)
     },
   },
   unmounted() {
