@@ -10,15 +10,3 @@ export default (Vue) => {
     Vue.use(item)
   })
 }
-
-// 将大写转换为 -
-// const toUpperCaseH = (str) => {
-//   const list = str.split('')
-
-//   str = list.map(item => {
-//     if (item.toUpperCase() === item) {
-//       return '-' + item.toLowerCase()
-//     } else return item
-//   })
-//   return str.join('')
-// }
