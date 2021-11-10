@@ -110,9 +110,13 @@ export default {
       if (!this.default) {
         const width = getScollbarWidth()
 
+        /**
+         * margin-right:${width}px;
+         * margin-bottom: ${width}px;
+         * padding-bottom: ${Math.abs(width)}px`
+         */
         this.wrapStyle = `
-        margin-right:${width}px; 
-        margin-bottom: ${width}px; 
+        margin-right:${width}px;
         padding-bottom: ${Math.abs(width)}px`
       } else {
         this.wrapStyle = ''

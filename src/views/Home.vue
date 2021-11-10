@@ -9,12 +9,8 @@
 </template>
 
 <script>
-import { toUpperCaseH } from '@/utils/util/index.js'
 export default {
   name: 'Home',
-  created () {
-    console.log(toUpperCaseH('moScrollbar'))
-  },
 }
 </script>
 
