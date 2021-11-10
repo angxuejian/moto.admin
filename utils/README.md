@@ -1,7 +1,10 @@
+# JavaScript常用方法
 
-# JS常用方法
 
-方法 | 备注
----  | ---
-toUpperCaseH | 将字符串大写转换为 -
-isTypeOf     | 判断类型是否一致
+# 公共方法
+
+方法 |
+---  | 
+[公共方法](./util/README.md)|
+[日期方法](./date/README.md)|
+[字符串方法](./string/README.md)|
