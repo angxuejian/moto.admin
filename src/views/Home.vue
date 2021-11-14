@@ -9,15 +9,9 @@
 </template>
 
 <script>
-import Moate from '../../utils/date/index'
 export default {
   name: 'Home',
   created() {
-    const moate = new Moate('2021-11-10')
-
-    // console.log(moate)
-    moate.getWeekNumber()
-    console.log(moate.getWeekNumberTime())
   },
 
 }
