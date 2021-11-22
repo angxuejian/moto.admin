@@ -1,17 +1,32 @@
 <template>
   <div class="home">
-    <mo-scrollbar scroll-y class="scrollbar">
+    <!-- <mo-scrollbar scroll-y class="scrollbar">
       <div ref='items' class="items">
         <div class="item" v-for="(item, index) in 320" :key="index"> {{ index + 1 }}</div>
       </div>
-    </mo-scrollbar>
+    </mo-scrollbar> -->
+
+    <button @click="setUserId">修改用户ID</button>
+    <div>这是用户 ----- {{USER_ID}}</div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   created() {
+  },
+  computed: {
+    ...mapGetters([
+      'USER_ID',
+    ]),
+  },
+  methods: {
+    setUserId: function() {
+      const d = parseInt(Math.random() * 10)
+      this.$store.dispatch('USER/RUN_USER_ID', d)
+    },
   },
 
 }
