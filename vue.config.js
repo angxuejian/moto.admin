@@ -9,7 +9,7 @@ module.exports = {
 
   // 配置跨越代理
   devServer: {
-    open: true,
+    open  : true,
     before: require('./src/mock/main'),
   },
 
