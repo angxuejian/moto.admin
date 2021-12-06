@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <!-- <mo-scrollbar scroll-y class="scrollbar">
+    <mo-scrollbar class="scrollbar">
       <div ref='items' class="items">
-        <div class="item" v-for="(item, index) in 320" :key="index"> {{ index + 1 }}</div>
+        <div class="item" v-for="(item, index) in 50" :key="index"> {{ index + 1 }}</div>
       </div>
-    </mo-scrollbar> -->
+    </mo-scrollbar>
 
     <!-- <button @click="setUserId">修改用户ID</button>
     <div>这是用户 ----- {{USER_ID}}</div> -->
@@ -53,9 +53,10 @@ export default {
   .item {
     display: block;
     text-align: center;
-    width: 100%;
+    width: 1000px;
     height: 50px;
     line-height: 50px;
+    // margin-right: 1000px;
   }
 }
 
