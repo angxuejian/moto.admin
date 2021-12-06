@@ -26,7 +26,7 @@
 
     <div v-if="isScrollShow('scrollX')" @mousedown="clickMousedown" data-type='x' ref="barbcx" class="mo-scrollbar__axis-x">
       <div ref="barx" :style="`width: ${axis.w}%;transform: translateX(${axis.x}%)`"
-        class=" axis-hover"
+        class="axis-hover"
         data-type='x'
         @mousedown.stop='onMousedown'
       ></div>
@@ -149,7 +149,7 @@ export default {
       this.mouseType = event.target.dataset.type
 
       if (this.mouseType === 'y') this.y = this.$refs.bary.offsetHeight / 2 // 模拟滑动距离
-      else if (this.mouseType === 'x') this.x = this.$refs.bary.offsetWidth / 2 // 模拟滑动距离
+      else if (this.mouseType === 'x') this.x = this.$refs.barx.offsetWidth / 2 // 模拟滑动距离
 
       this.clearScrollType(event, true)
     },

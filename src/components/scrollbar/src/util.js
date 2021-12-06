@@ -49,7 +49,7 @@ export const getScrollBB = function(params) {
   const { boxBB, itemClienBB, clickBarBB, boxBarBB, boxScrollBB } = params
   let   { boxItemBB = 0, clickBarToBoxItem = 0, boxSlidingBB = 0 } = params
 
-  boxItemBB = (boxBB - itemClienBB) * -1
+  boxItemBB = itemClienBB - boxBB
   !clickBarToBoxItem && (clickBarToBoxItem = boxItemBB - clickBarBB)
   boxSlidingBB = clickBarToBoxItem / boxBarBB * integer
 
