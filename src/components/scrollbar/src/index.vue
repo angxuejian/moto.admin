@@ -35,14 +35,14 @@
 </template>
 
 <script>
-import getScollbarWidth from '@/utils/scrollbar-width'
 import {
-  getScrollDistance,
   getScrollSize,
   getClientTop,
   getScrollBB,
-} from './util'
+} from './setup/util'
 import { addResize, removeResize } from '@/utils/resize-event'
+import useWrap from './setup/wrap.js'
+import { ref } from 'vue'
 export default {
   name : 'MoScrollbar',
   props: {
@@ -65,16 +65,26 @@ export default {
       },
     },
   },
+
+  setup(props) {
+    const axis = ref({ y: 0, x: 0, h: 0, w: 0 }) // 滚动条的位置与大小
+
+    const { wrapStyle, getWrapStyle, getWrapDistance } = useWrap(props.default, axis)
+
+    return {
+      axis,
+      wrapStyle,
+      getWrapStyle,
+      getWrapDistance,
+    }
+  },
   data() {
     return {
-      wrapStyle    : 0, // wrap标签的样式
-      scollbarWidth: 0, // 滚动条宽度
-      axis         : { y: 0, x: 0, h: 0, w: 0 }, // 滚动条的位置与大小
-      isMouse      : false,
-      mouseType    : '',
-      x            : null, // 当前点击位置距离盒子左边 距离
-      y            : null, // 当前点击位置距离盒子顶部 距离
-      isScroll     : false, // 是否同时显示 x 和 y 轴
+      isMouse  : false,
+      mouseType: '',
+      x        : null, // 当前点击位置距离盒子左边 距离
+      y        : null, // 当前点击位置距离盒子顶部 距离
+      isScroll : false, // 是否同时显示 x 和 y 轴
     }
   },
   mounted() {
@@ -105,31 +115,6 @@ export default {
       else return false
     },
 
-    // 隐藏 x、y轴滚动条
-    getWrapStyle() {
-      if (!this.default) {
-        const width = getScollbarWidth()
-
-        /**
-         * margin-right:${width}px;
-         * margin-bottom: ${width}px;
-         * padding-bottom: ${Math.abs(width)}px`
-         */
-        this.wrapStyle = `
-        margin-right:${width}px;
-        padding-bottom: ${Math.abs(width)}px`
-      } else {
-        this.wrapStyle = ''
-      }
-    },
-
-    getWrapDistance: function(event) {
-      if (this.default) return
-
-      const { x, y } = getScrollDistance(event.target)
-      this.axis.y = y
-      this.axis.x = x
-    },
     getWrapSize: function() {
       const { w, h } = getScrollSize(this.$refs.wrap)
       this.axis.h = h
