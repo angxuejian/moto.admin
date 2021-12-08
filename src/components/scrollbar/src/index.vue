@@ -39,9 +39,10 @@ import {
   getScrollSize,
   getClientTop,
   getScrollBB,
-} from './setup/util'
+} from './util'
 import { addResize, removeResize } from '@/utils/resize-event'
-import useWrap from './setup/wrap.js'
+import useWrap from './wrap'
+import useBar from './bar'
 import { ref } from 'vue'
 export default {
   name : 'MoScrollbar',
@@ -70,6 +71,7 @@ export default {
     const axis = ref({ y: 0, x: 0, h: 0, w: 0 }) // 滚动条的位置与大小
 
     const { wrapStyle, getWrapStyle, getWrapDistance } = useWrap(props.default, axis)
+    // const { } = useBar()
 
     return {
       axis,
