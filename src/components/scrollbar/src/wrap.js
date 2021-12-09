@@ -17,7 +17,6 @@ export default function useWrap(defau, axis) {
   // 监听scroll事件 - 修改x、y轴滚动位置
   const getWrapDistance = (event) => {
     if (defau.value) return
-
     const { x, y } = getScrollDistance(event.target)
     axis.value.y = y
     axis.value.x = x

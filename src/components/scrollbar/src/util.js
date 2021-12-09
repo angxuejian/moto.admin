@@ -30,29 +30,21 @@ export const getClientTop = function(dom) {
 
 /**
  * 计算滚动条 Y轴 或 X轴 滚动区域高度
- * BB = Top或Left、 width或height、 Y或X、 顶部或左边
- * @param {number} params.boxBB             盒子距离页面BB 高度
- * @param {number} params.itemClienBB       当前dom标签距离页面BB 高度
- * @param {number} params.boxItemBB         盒子BB距离当前dom标签 高度
- * @param {number} params.clickBarBB        点击bar位置距离盒子BB 高度
- * @param {number} params.clickBarToBoxItem 盒子从点击bar位置 到 当前dom标签位置的 距离
- * @param {number} params.boxBarBB          盒子滚动条 高度
- * @param {number} params.boxSlidingBB      盒子已滚动的 高度
- * @param {number} params.boxScrollBB       盒子滚动区域 高度
+ * @param {number} params.nowBarbc      鼠标拖动时当前滚动条背景(顶部或者左边) 距离页面(顶部或者左边)距离
+ * @param {number} params.barSize       滚动条大小
+ * @param {number} params.wrapSize      盒子滚动区域大小
+ * @param {number} params.startBarbc    滚动条背景(顶部或者左边) 距离页面(顶部或者左边)距离
+ * @param {number} params.nowScrollSize 点击时在滚动条中的位置
  * @returns scrollBB
  */
-export const getScrollBB = function(params) {
+export const getScrollBar = function(params) {
   if (!params) return
 
   const integer = 100  // 换算为 整数
+  const { startBarbc, nowBarbc, scrollBarSize, barSize, wrapSize } = params
 
-  const { boxBB, itemClienBB, clickBarBB, boxBarBB, boxScrollBB } = params
-  let   { boxItemBB = 0, clickBarToBoxItem = 0, boxSlidingBB = 0 } = params
+  const nowBcSize = nowBarbc - startBarbc
+  const distanceBary = ((nowBcSize - scrollBarSize) / barSize) * integer
 
-  boxItemBB = itemClienBB - boxBB
-  !clickBarToBoxItem && (clickBarToBoxItem = boxItemBB - clickBarBB)
-  boxSlidingBB = clickBarToBoxItem / boxBarBB * integer
-
-  const scrollBB = boxSlidingBB * boxScrollBB / integer // 滚动区域高度
-  return scrollBB
+  return distanceBary * wrapSize / integer
 }
