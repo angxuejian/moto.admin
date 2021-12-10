@@ -1,8 +1,7 @@
 
-import { getClientTop, getScrollBar } from './util'
+import { getClientTop, getScrollBar } from '../util'
 import { ref, onUnmounted } from 'vue'
-export default function useBar() {
-  const wrap = ref(null)
+export default function useBar(wrap) {
   const bary = ref(null)
   const barx = ref(null)
   const barbcy = ref(null)
@@ -13,7 +12,7 @@ export default function useBar() {
   const scrollType = ref('') // 鼠标点击轴 类型
 
   // 点击滚动条背景跳转过去
-  const clikcScrollbar = (event) => {
+  const clickScrollbarBc = (event) => {
     if (event.ctrlKey || event.button === 2) return
 
     scrollType.value = event.target.dataset.type
@@ -110,7 +109,7 @@ export default function useBar() {
     bary,
     barbcx,
     barbcy,
-    clikcScrollbar,
+    clickScrollbarBc,
     clickSlideScrollbar,
   }
 }

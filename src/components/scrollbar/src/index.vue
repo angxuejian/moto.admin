@@ -16,7 +16,7 @@
     </div>
 
     <!-- x/y 轴滚动条 -->
-    <div v-if="isScrollShow('scrollY')" @mousedown="clikcScrollbar" data-type='y' ref="barbcy" class="mo-scrollbar__axis-y">
+    <div v-if="isScrollShow('scrollY')" @mousedown="clickScrollbarBc" data-type='y' ref="barbcy" class="mo-scrollbar__axis-y axis-bc-hover">
       <div ref="bary" :style="`height: ${axis.h}%;transform: translateY(${axis.y}%)`"
         class="axis-hover"
         data-type='y'
@@ -24,7 +24,7 @@
       ></div>
     </div>
 
-    <div v-if="isScrollShow('scrollX')" @mousedown="clikcScrollbar" data-type='x' ref="barbcx" class="mo-scrollbar__axis-x">
+    <div v-if="isScrollShow('scrollX')" @mousedown="clickScrollbarBc" data-type='x' ref="barbcx" class="mo-scrollbar__axis-x axis-bc-hover">
       <div ref="barx" :style="`width: ${axis.w}%;transform: translateX(${axis.x}%)`"
         class="axis-hover"
         data-type='x'
@@ -35,11 +35,9 @@
 </template>
 
 <script>
-import { getScrollSize } from './util'
-import { addResize, removeResize } from '@/utils/resize-event'
-import useWrap from './wrap'
-import useBar from './bar'
-import { ref } from 'vue'
+import useWrap from './setup/wrap'
+import useBar from './setup/bar'
+import { ref, toRefs } from 'vue'
 export default {
   name : 'MoScrollbar',
   props: {
@@ -65,62 +63,23 @@ export default {
 
   setup(props) {
     const axis = ref({ y: 0, x: 0, h: 0, w: 0 }) // 滚动条的位置与大小
+    const { default: defau, scrollY, scrollX } = toRefs(props)
 
-    const { wrapStyle, getWrapStyle, getWrapDistance } = useWrap(props.default, axis)
-    const bar = useBar()
+    const refWrap = useWrap(scrollY, scrollX, defau, axis)
+    const refBar  = useBar(refWrap.wrap)
 
     return {
       axis,
-      wrapStyle,
-      getWrapStyle,
-      getWrapDistance,
-      ...bar,
+      ...refWrap,
+      ...refBar,
     }
-  },
-  data() {
-    return {
-      isScroll: false, // 是否同时显示 x 和 y 轴
-    }
-  },
-  mounted() {
-    this.init()
-    addResize(this.$refs.reszie, this.getWrapSize)
-  },
-  beforeUnmount() {
-    removeResize(this.$refs.reszie, this.getWrapSize)
-  },
-  watch: {
-    default() { this.init() },
-    scrollY() { this.init() },
-    scrollX() { this.init() },
-  },
-
-  methods: {
-    init: function() {
-      this.isScroll = (!this.scrollY && !this.scrollX)
-      this.getWrapStyle()
-      if (!this.default) {
-        this.getWrapSize()
-      }
-    },
-
-    isScrollShow: function (type) {
-      if (!this.default && this[type]) return true
-      else if (!this.default && this.isScroll) return true
-      else return false
-    },
-
-    getWrapSize: function() {
-      const { w, h } = getScrollSize(this.$refs.wrap)
-      this.axis.h = h
-      this.axis.w = w
-    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-$hover-bc: #c1c1c1;
+$hover-bar: #c1c1c1;
+$hover-bc: #ededed;
 %axis-bar {
   border-radius: 10px;
   transition: 0.3s background;
@@ -135,6 +94,9 @@ $hover-bc: #c1c1c1;
   &:focus,
   &:active {
     .axis-hover {
+      background: $hover-bar;
+    }
+    .axis-bc-hover {
       background: $hover-bc;
     }
   }
@@ -158,7 +120,6 @@ $hover-bc: #c1c1c1;
     right: 0px;
     top: 2px;
     height: 100%;
-    // background: #F1F1F1;
     width: 8px;
     div {
       width: 100%;
@@ -171,16 +132,11 @@ $hover-bc: #c1c1c1;
     width: 100%;
     left: 0px;
     bottom: 0px;
-    // background: #F1F1F1;
     height: 8px;
     div {
       height: 100%;
-       @extend %axis-bar;
+      @extend %axis-bar;
     }
-  }
-
-  .axis-hover:hover {
-    background: #A8A8A8;
   }
 }
 </style>
