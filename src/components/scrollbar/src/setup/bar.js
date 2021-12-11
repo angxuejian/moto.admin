@@ -1,4 +1,3 @@
-
 import { getClientTop, getScrollBar } from '../util'
 import { ref, onUnmounted } from 'vue'
 export default function useBar(wrap) {
@@ -65,22 +64,22 @@ export default function useBar(wrap) {
     switch (scrollType.value) {
       case 'y':
         params = {
-          barSize      : barbcy.value.offsetHeight,
-          nowBarbc     : event.clientY,
-          wrapSize     : wrap.value.scrollHeight,
-          startBarbc   : getClientTop(barbcy.value).top,
-          scrollBarSize: scrollBarY.value,
+          barSize   : barbcy.value.offsetHeight,
+          nowBarbc  : event.clientY,
+          wrapSize  : wrap.value.scrollHeight,
+          scrollBar : scrollBarY.value,
+          startBarbc: getClientTop(barbcy.value).top,
         }
         data.value = getScrollBar(params)
         data.type  = 'scrollTop'
         break
       case 'x':
         params = {
-          barSize      : barbcx.value.offsetWidth,
-          nowBarbc     : event.clientX,
-          wrapSize     : wrap.value.scrollWidth,
-          startBarbc   : getClientTop(barbcx.value).left,
-          scrollBarSize: scrollBarX.value,
+          barSize   : barbcx.value.offsetWidth,
+          nowBarbc  : event.clientX,
+          wrapSize  : wrap.value.scrollWidth,
+          scrollBar : scrollBarX.value,
+          startBarbc: getClientTop(barbcx.value).left,
         }
         data.value = getScrollBar(params)
         data.type  = 'scrollLeft'
