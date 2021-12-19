@@ -81,8 +81,8 @@ export default {
 $hover-bar: #c1c1c1;
 $hover-bc: #ededed;
 %axis-bar {
-  border-radius: 10px;
-  transition: 0.3s background;
+  border-radius: 5px;
+  transition: background 0.3s;
   background: transparent;
   position: absolute;
 }
@@ -100,6 +100,7 @@ $hover-bc: #ededed;
       background: $hover-bc;
     }
   }
+
   .mo-scrollbar__wrap {
     height: 100%;
     overflow: scroll;
@@ -121,9 +122,18 @@ $hover-bc: #ededed;
     top: 2px;
     height: 100%;
     width: 8px;
+    transition: width 0.3s;
     div {
       width: 100%;
       @extend %axis-bar
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      width: 15px;
+      div {
+        border-radius: 0 !important;
+      }
     }
   }
 
@@ -133,9 +143,18 @@ $hover-bc: #ededed;
     left: 0px;
     bottom: 0px;
     height: 8px;
+    transition: height 0.3s;
     div {
       height: 100%;
       @extend %axis-bar;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      height: 15px;
+      div {
+        border-radius: 0 !important;
+      }
     }
   }
 }
