@@ -13,7 +13,15 @@ module.exports = {
     before: require('./src/mock/main'),
   },
 
-  // configureWebpack: config => {
-  //   console.log(config, '-这是什么')
-  // }
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test   : /\.mjs$/,
+          include: /node_modules/,
+          type   : 'javascript/auto',
+        },
+      ],
+    },
+  },
 }

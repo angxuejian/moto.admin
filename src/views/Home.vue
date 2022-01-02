@@ -16,7 +16,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-export default {
+import { defineComponent } from 'vue'
+export default defineComponent({
   name: 'Home',
   created() {
   },
@@ -32,7 +33,7 @@ export default {
     },
   },
 
-}
+})
 </script>
 
 <style lang="scss" scoped>

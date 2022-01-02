@@ -1,9 +1,10 @@
 <template>
   <div class="layout">
     <div class="navbar">
-      <div><router-link to='/'>首页</router-link></div>
+      <!-- <div><router-link to='/'>首页</router-link></div>
       <div><router-link to='/user/list'>用户列表</router-link></div>
-      <div><router-link to='/project/list'>工程列表</router-link></div>
+      <div><router-link to='/project/list'>工程列表</router-link></div> -->
+      <MENU />
     </div>
     <div class="body">
       <div class="bread-crumb"></div>
@@ -17,11 +18,17 @@
 </template>
 
 <script>
-export default {
-  setup() {
+import { defineAsyncComponent, defineComponent } from 'vue'
+export default defineComponent({
+  name: 'LayoutIndex',
 
+  components: {
+    MENU: defineAsyncComponent(() => import('./components/menu.vue')),
   },
-}
+  setup() {
+    return {}
+  },
+})
 </script>
 
 <style lang="scss" scoped>
