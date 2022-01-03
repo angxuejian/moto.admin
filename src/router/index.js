@@ -2,6 +2,7 @@ import {
   createRouter,
   createWebHistory,
 } from 'vue-router'
+import Login from '../views/login'
 import Home from '../views/Home.vue'
 import Layout from '../layout/index'
 
@@ -19,7 +20,10 @@ import Layout from '../layout/index'
 const routes = [
   {
     path     : '/',
-    name     : 'index',
+    component: Login,
+  },
+  {
+    path     : '/home',
     component: Layout,
     redirect : '/home',
     children : [
@@ -53,6 +57,12 @@ const routes = [
         component: () => import('@/views/project/list'),
       },
     ],
+  },
+
+  {
+    path     : '/:pathMatch(.*)*',
+    name     : '404',
+    component: () => import('@/views/error/404'),
   },
 ]
 
