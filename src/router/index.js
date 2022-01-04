@@ -19,17 +19,23 @@ import Layout from '../layout/index'
  */
 const routes = [
   {
-    path     : '/',
+    path: '/login',
+    meta: {
+      title: '登录',
+    },
     component: Login,
   },
   {
-    path     : '/home',
+    path     : '/',
     component: Layout,
     redirect : '/home',
     children : [
       {
-        path     : '/home',
-        name     : 'Home',
+        path: '/home',
+        name: 'Home',
+        meta: {
+          title: '首页',
+        },
         component: Home,
       },
     ],
@@ -40,8 +46,11 @@ const routes = [
     component: Layout,
     children : [
       {
-        path     : '/user/list',
-        name     : 'userList',
+        path: '/user/list',
+        name: 'userList',
+        meta: {
+          title: '用户列表',
+        },
         component: () => import('@/views/user/list'),
       },
     ],
@@ -52,16 +61,22 @@ const routes = [
     component: Layout,
     children : [
       {
-        path     : '/project/list',
-        name     : 'projectList',
+        path: '/project/list',
+        name: 'projectList',
+        meta: {
+          title: '项目列表',
+        },
         component: () => import('@/views/project/list'),
       },
     ],
   },
 
   {
-    path     : '/:pathMatch(.*)*',
-    name     : '404',
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    meta: {
+      title: '404',
+    },
     component: () => import('@/views/error/404'),
   },
 ]

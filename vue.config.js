@@ -1,6 +1,15 @@
+const setting = require('./src/setting')
 
 module.exports = {
 
+  pages: {
+    index: {
+      title   : setting.name,
+      entry   : 'src/main.js',
+      template: 'public/index.html',
+      filename: 'index.html',
+    },
+  },
   // 区分不同环境下的路径
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
 

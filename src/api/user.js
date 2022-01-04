@@ -1,4 +1,4 @@
-import { PublicAxios } from '@/utils/PublicAxios'
+import { PublicAxios } from '@/utils/public-axios'
 const $ = new PublicAxios()
 
 export const getUserList = () => {
