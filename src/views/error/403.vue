@@ -1,9 +1,9 @@
 <template>
-  <div class="not-found">404</div>
+  <div class="not-allowed">暂无权限 - 403</div>
 </template>
 
 <style lang="scss" scoped>
-.not-found {
+.not-allowed {
   width: 200px;
   height: 200px;
   position: fixed;

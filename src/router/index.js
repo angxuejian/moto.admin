@@ -14,7 +14,7 @@ import Layout from '../layout/index'
  * @params {boolean}  hidden     是否显示路由
  * @params {object}   meta       自定义数据
  * @params {string}   meta.title 路由名称
- * @params {array}    meta.auth  校验路由权限
+ * @params {array}    meta.vcode 校验路由权限(Verification code)
  * @params {boolean}  meta.keep  是否缓存页面(关闭标签页时、会销毁缓存)
  */
 const routes = [
@@ -35,6 +35,7 @@ const routes = [
         name: 'Home',
         meta: {
           title: '首页',
+          vcode: ['home'],
         },
         component: Home,
       },
@@ -69,6 +70,14 @@ const routes = [
         component: () => import('@/views/project/list'),
       },
     ],
+  },
+  {
+    path: '/403',
+    name: '403',
+    meta: {
+      title: '403',
+    },
+    component: () => import('@/views/error/403'),
   },
 
   {
