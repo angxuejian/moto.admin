@@ -11,9 +11,9 @@ import './beforeEach' // 路由校验
 
 const app = createApp(App)
   .use(store)
-  .use(router)
   .use(components)
   .use(ElementPlus)
+  .use(router)
 
 directive(app) // 注册自定义指令
 app.mount('#app')

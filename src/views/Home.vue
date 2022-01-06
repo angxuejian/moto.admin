@@ -1,16 +1,17 @@
 <template>
   <div class="home">
-    <mo-scrollbar  scroll-y class="scrollbar">
+    <!-- <mo-scrollbar  scroll-y class="scrollbar">
       <div ref='items' class="items">
         <div class="item" v-for="(item, index) in 50" :key="index"> {{ index + 1 }}</div>
       </div>
-    </mo-scrollbar>
+    </mo-scrollbar> -->
 
     <!-- <button @click="setUserId">修改用户ID</button>
     <div>这是用户 ----- {{USER_ID}}</div> -->
 
     <!-- <div v-auth='"user"'>这是普通用户</div>
     <div v-auth='"admin"'>这是管理员-----</div> -->
+    <router-link to="/user">去用户</router-link>
   </div>
 </template>
 
