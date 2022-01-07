@@ -16,7 +16,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') next('/') // 有token，去首页
     else {
       const verify = store.getters.USER_ROUTER
-      console.log(verify, '--->')
+      // console.log(verify, '--->')
       if (verify.length) {
         if (to.meta.vcode?.length) {
           const r = to.meta.vcode.find(s => verify.includes(s))

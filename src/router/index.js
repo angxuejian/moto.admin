@@ -35,39 +35,8 @@ const routes = [
         name: 'Home',
         meta: {
           title: '首页',
-          vcode: ['home'],
         },
         component: Home,
-      },
-    ],
-  },
-  {
-    path     : '/user',
-    name     : 'User',
-    component: Layout,
-    children : [
-      {
-        path: '/user/list',
-        name: 'userList',
-        meta: {
-          title: '用户列表',
-        },
-        component: () => import('@/views/user/list'),
-      },
-    ],
-  },
-  {
-    path     : '/project',
-    name     : 'Project',
-    component: Layout,
-    children : [
-      {
-        path: '/project/list',
-        name: 'projectList',
-        meta: {
-          title: '项目列表',
-        },
-        component: () => import('@/views/project/list'),
       },
     ],
   },

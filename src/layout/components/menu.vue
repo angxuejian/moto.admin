@@ -32,7 +32,15 @@
 
 <script>
 export default {
-  name   : 'Home',
+  name    : 'Home',
+  computed: {
+    menuBar() {
+      return this.$store.getters.USER_MENU
+    },
+  },
+  created () {
+    console.log(this.$store.getters.USER_MENU, 'bar-vue')
+  },
   methods: {
     handleClose: function() {
 
