@@ -7,7 +7,7 @@
     >
       <el-sub-menu index="1">
           <template #title>
-            <el-icon></el-icon>
+            <el-icon><box /></el-icon>
             <span>Navigator One</span>
           </template>
           <el-menu-item-group title="Group One">
@@ -24,7 +24,7 @@
       </el-sub-menu>
 
       <el-menu-item index="2">
-            <el-icon></el-icon>
+            <el-icon><location /></el-icon>
          <span>Navigator Two</span>
       </el-menu-item>
     </el-menu>
