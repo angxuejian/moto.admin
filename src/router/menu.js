@@ -6,7 +6,7 @@ export const ALL_MENU = [
     name: 'OnlyPage',
     meta: {
       title: '单独页',
-      vcode: ['only-page'],
+      // vcode: ['only-page'],
     },
     component: () => import('@/views/only-page/index'),
   },
@@ -14,7 +14,7 @@ export const ALL_MENU = [
     path: '/user',
     name: 'User',
     meta: {
-      vcode: ['user1', 'user2'],
+      title: '用户管理',
     },
     component: Layout,
     children : [
@@ -22,8 +22,7 @@ export const ALL_MENU = [
         path: '/user/list',
         name: 'userList',
         meta: {
-          title: '用户列表',
-          vcode: ['user1'],
+          title: '用户列表1',
         },
         component: () => import('@/views/user/list'),
       },
@@ -31,23 +30,25 @@ export const ALL_MENU = [
         path: '/user/list2',
         name: 'userList2',
         meta: {
-          title: '用户列表',
-          vcode: ['user2'],
+          title: '用户列表2',
         },
         component: () => import('@/views/user/list'),
       },
     ],
   },
   {
-    path     : '/project',
-    name     : 'Project',
+    path: '/project',
+    name: 'Project',
+    meta: {
+      title: '项目管理',
+    },
     component: Layout,
     children : [
       {
         path: '/project/list',
         name: 'ProjectList',
         meta: {
-          title: '项目列表',
+          title: '项目列表1',
         },
         component: () => import('@/views/project/list'),
         children : [
@@ -55,7 +56,7 @@ export const ALL_MENU = [
             path: '/project/list1',
             name: 'ProjectList1',
             meta: {
-              title : '列表一',
+              title : '列表一1',
               hidden: true,
             },
             component: () => import('@/views/project/views/project1'),
@@ -65,11 +66,19 @@ export const ALL_MENU = [
             name: 'ProjectList2',
             meta: {
               title: '列表二',
-              vcode: ['project-list2'],
+              // vcode: ['project-list2'],
             },
             component: () => import('@/views/project/views/project1'),
           },
         ],
+      },
+      {
+        path: '/project/list2',
+        name: 'ProjectList2',
+        meta: {
+          title: '项目列表2',
+        },
+        component: () => import('@/views/project/list'),
       },
     ],
   },
