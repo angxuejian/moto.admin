@@ -1,13 +1,10 @@
 <template>
   <div class="layout">
-    <div class="navbar">
-      <MENU />
-    </div>
+    <div class="navbar"><MENU /></div>
     <div class="body">
-      <div class="bread-crumb"></div>
+      <div class="breadcrumb"><BREADCRUMB /></div>
 
       <div class="main">
-
         <router-view />
       </div>
     </div>
@@ -20,7 +17,8 @@ export default defineComponent({
   name: 'LayoutIndex',
 
   components: {
-    MENU: defineAsyncComponent(() => import('./components/menu')),
+    MENU      : defineAsyncComponent(() => import('./components/menu')),
+    BREADCRUMB: defineAsyncComponent(() => import('./components/breadcrumb')),
   },
   setup() {
     return {}
@@ -43,12 +41,15 @@ export default defineComponent({
     top: 0;
     width: 88%;
     height: 100%;
-    .bread-crumb {
-      width: 100%;
+    .breadcrumb {
+      width: 99%;
       height: 7%;
       position: static;
       top: 0;
       left: 0;
+      display: flex;
+      align-items: center;
+      padding-left: 1%;
     }
     .main {
       width: 100%;
