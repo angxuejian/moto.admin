@@ -12,25 +12,40 @@
     <!-- <div v-auth='"user"'>这是普通用户</div>
     <div v-auth='"admin"'>这是管理员-----</div> -->
     <!-- <router-link to="/user">去用户</router-link> -->
+    <div v-if="isShow" v-clickoutside='onCallbackClose' class="test">
+      测试 click outside
+    </div>
   </div>
 </template>
 
 <script>
 import { useStore } from 'vuex'
-import { defineComponent, toRefs } from 'vue'
+import { defineComponent, toRefs, ref, reactive } from 'vue'
+import Clickoutside from '@/directive/click-outside'
 export default defineComponent({
-  name: 'Home',
+  name      : 'Home',
+  directives: { Clickoutside },
   setup() {
+    const onCallbackClose = () => {
+      isShow.value = false
+      setTimeout(() => {
+        isShow.value = true
+      }, 2000)
+    }
+    const isShow = ref(true)
     const store = useStore()
-    const { USER_ID } = toRefs(store.getters)
+    const { USER_ID } = toRefs(reactive(store.getters))
     const setUserId = () => {
       const d = parseInt(Math.random() * 10)
       store.dispatch('USER/RUN_USER_ID', d)
     }
 
     return {
+      isShow,
+      // store,
       USER_ID,
       setUserId,
+      onCallbackClose,
     }
   },
 })
@@ -58,6 +73,11 @@ export default defineComponent({
     height: 50px;
     line-height: 50px;
   }
+}
+.test {
+  width: 200px;
+  height: 200px;
+  border: 1px solid red;
 }
 
 </style>
