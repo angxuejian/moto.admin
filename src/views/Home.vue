@@ -6,34 +6,33 @@
       </div>
     </mo-scrollbar> -->
 
-    <!-- <button @click="setUserId">修改用户ID</button>
-    <div>这是用户 ----- {{USER_ID}}</div> -->
+    <button @click="setUserId">修改用户ID</button>
+    <div>这是用户 ----- {{USER_ID}}</div>
 
     <!-- <div v-auth='"user"'>这是普通用户</div>
     <div v-auth='"admin"'>这是管理员-----</div> -->
-    <router-link to="/user">去用户</router-link>
+    <!-- <router-link to="/user">去用户</router-link> -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import { defineComponent, toRefs } from 'vue'
 export default defineComponent({
   name: 'Home',
-  created() {
-  },
-  computed: {
-    ...mapGetters([
-      'USER_ID',
-    ]),
-  },
-  methods: {
-    setUserId: function() {
+  setup() {
+    const store = useStore()
+    const { USER_ID } = toRefs(store.getters)
+    const setUserId = () => {
       const d = parseInt(Math.random() * 10)
-      this.$store.dispatch('USER/RUN_USER_ID', d)
-    },
-  },
+      store.dispatch('USER/RUN_USER_ID', d)
+    }
 
+    return {
+      USER_ID,
+      setUserId,
+    }
+  },
 })
 </script>
 
