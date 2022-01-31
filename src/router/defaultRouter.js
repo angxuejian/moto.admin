@@ -8,20 +8,20 @@ const defaultRouter = [
     meta: {
       title: '登录',
     },
-    hidden   : true,
+    hidden: true,
     component: Login,
   },
   {
-    path     : '/',
+    path: '/',
     component: Layout,
-    redirect : '/home',
-    children : [
+    redirect: '/home',
+    children: [
       {
         path: '/home',
         name: 'Home',
         meta: {
           title: '首页',
-          icon : 'sunset',
+          icon: 'sunset',
         },
         component: Home,
       },
@@ -33,7 +33,7 @@ const defaultRouter = [
     meta: {
       title: '403',
     },
-    hidden   : true,
+    hidden: true,
     component: () => import('@/views/error/403'),
   },
 
@@ -43,7 +43,7 @@ const defaultRouter = [
     meta: {
       title: '404',
     },
-    hidden   : true,
+    hidden: true,
     component: () => import('@/views/error/404'),
   },
 ]

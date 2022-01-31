@@ -2,17 +2,17 @@
 import Layout from '../layout/index'
 const asyncRouter = [
   {
-    path    : '/export',
-    name    : 'Export',
+    path: '/export-manage',
+    name: 'ExportManage',
     children: [
       {
-        path: '/file',
+        path: '/export-file',
         name: 'ExportFile',
         meta: {
           title: '文件导出',
-          icon : 'files',
+          icon: 'files',
         },
-        component: () => import('@/views/export'),
+        component: () => import('@/views/export/index'),
       },
     ],
     component: Layout,

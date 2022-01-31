@@ -11,7 +11,7 @@ router.beforeEach(async (to, from, next) => {
   document.title = `${setting.name} - ${to.meta.title}`
   const token = getToken()
   NProgress.start()
-
+  console.log(router.getRoutes())
   if (token) {
     if (to.path === '/login') next('/') // 有token，去首页
     else {
@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
           else next() // 该路由已有权限，显示页面
         } else next() // 该路由不需要权限，显示页面
       } else {
-        const { success } = await store.dispatch('USER/RUN_USER_VCODE')
+        const { success } = await store.dispatch('USER/RUN_VCODE')
         if (success) next({ path: to.path, replace: true })  // 没有用户可访问的路由，请求接口后，重新刷新当前页面
         else {
           remToken()

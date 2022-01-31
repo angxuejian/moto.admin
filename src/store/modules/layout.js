@@ -5,17 +5,21 @@ import router from '@/router'
 import { getRouterMenu, setRouterUrl } from '@/utils/menu'
 export default {
   namespaced: true,
-  state     : {
-    MENU: getLayoutMune() || [], // 用户可访问的菜单导航
+  state: {
+    MENU: [], // 用户可访问的菜单导航
+    IS_COLLAPSE: false, // 侧边菜单栏 - 展开或缩放
   },
   mutations: {
-    SET_LAYOUT_MENU: (state, menu) => { state.MENU = menu; setLayoutMune(menu) },
-
+    SET_MENU: (state, menu) => { state.MENU = menu },
+    SET_COLLAPSE: (state) => { state.IS_COLLAPSE = !state.IS_COLLAPSE },
   },
   actions: {
-    RUN_LAYOUT_MENU: function(context, vcode) {
+    RUN_MENU: function(context, vcode) {
       getRouterMenu(vcode, asyncRouter).forEach(r => router.addRoute(r))
-      context.commit('SET_LAYOUT_MENU', setRouterUrl([...defaultRouter, ...asyncRouter]))
+      context.commit('SET_MENU', setRouterUrl([...defaultRouter, ...asyncRouter]))
+    },
+    RUN_COLLAPSE: function(context) {
+      context.commit('SET_COLLAPSE')
     },
   },
 }

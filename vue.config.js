@@ -4,8 +4,8 @@ module.exports = {
 
   pages: {
     index: {
-      title   : setting.name,
-      entry   : 'src/main.js',
+      title: setting.name,
+      entry: 'src/main.js',
       template: 'public/index.html',
       filename: 'index.html',
     },
@@ -18,7 +18,7 @@ module.exports = {
 
   // 配置跨越代理
   devServer: {
-    open  : true,
+    open: true,
     before: require('./src/mock/main'),
   },
 
@@ -26,9 +26,9 @@ module.exports = {
     module: {
       rules: [
         {
-          test   : /\.mjs$/,
+          test: /\.mjs$/,
           include: /node_modules/,
-          type   : 'javascript/auto',
+          type: 'javascript/auto',
         },
       ],
     },

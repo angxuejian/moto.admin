@@ -39,7 +39,7 @@ import useWrap from './setup/wrap'
 import useBar from './setup/bar'
 import { ref, toRefs } from 'vue'
 export default {
-  name : 'MoScrollbar',
+  name: 'MoScrollbar',
   props: {
     scrollY: {
       type: Boolean,

@@ -64,10 +64,10 @@ export default function useBar(wrap) {
     switch (scrollType.value) {
       case 'y':
         params = {
-          barSize   : barbcy.value.offsetHeight,
-          nowBarbc  : event.clientY,
-          wrapSize  : wrap.value.scrollHeight,
-          scrollBar : scrollBarY.value,
+          barSize: barbcy.value.offsetHeight,
+          nowBarbc: event.clientY,
+          wrapSize: wrap.value.scrollHeight,
+          scrollBar: scrollBarY.value,
           startBarbc: getClientTop(barbcy.value).top,
         }
         data.value = getScrollBar(params)
@@ -75,10 +75,10 @@ export default function useBar(wrap) {
         break
       case 'x':
         params = {
-          barSize   : barbcx.value.offsetWidth,
-          nowBarbc  : event.clientX,
-          wrapSize  : wrap.value.scrollWidth,
-          scrollBar : scrollBarX.value,
+          barSize: barbcx.value.offsetWidth,
+          nowBarbc: event.clientX,
+          wrapSize: wrap.value.scrollWidth,
+          scrollBar: scrollBarX.value,
           startBarbc: getClientTop(barbcx.value).left,
         }
         data.value = getScrollBar(params)

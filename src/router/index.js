@@ -4,7 +4,6 @@ import {
 } from 'vue-router'
 import defaultRouter from './defaultRouter'
 /**
- * @params {string}   path       路由地址
  * @params {string}   name       跳转路由地址名称
  * @params {template} component  组件(父页面可使用Layout布局组件)
  * @params {array}    children   子组件列表
@@ -16,7 +15,7 @@ import defaultRouter from './defaultRouter'
  */
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes : defaultRouter,
+  routes: defaultRouter,
 })
 
 export default router

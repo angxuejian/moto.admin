@@ -7,9 +7,9 @@ const Mock = require('mockjs')
 module.exports = function(app) {
   app.get('/api/user/list', function(req, res) {
     res.json(Mock.mock({
-      status : 200,
+      status: 200,
       message: '请求成功',
-      result : Mock.mock({
+      result: Mock.mock({
         'list|10': [{
           name: '@cname',
           date: '@datetime',
@@ -19,9 +19,9 @@ module.exports = function(app) {
   })
   app.get('/api/user/info', function(req, res) {
     res.json(Mock.mock({
-      status : 200,
+      status: 200,
       message: '请求成功',
-      result : Mock.mock({
+      result: Mock.mock({
         'list|10': [{
           date: '@datetime',
         }],

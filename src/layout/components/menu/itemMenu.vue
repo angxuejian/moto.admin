@@ -18,7 +18,7 @@
 <script>
 import { ref } from 'vue'
 export default {
-  name : 'ItemMenu',
+  name: 'ItemMenu',
   props: {
     item: {
       type: Object,

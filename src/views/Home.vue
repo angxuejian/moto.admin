@@ -23,18 +23,18 @@ import { useStore } from 'vuex'
 import { defineComponent, toRefs, ref, reactive } from 'vue'
 import Clickoutside from '@/directive/click-outside'
 export default defineComponent({
-  name      : 'Home',
+  name: 'Home',
   directives: { Clickoutside },
   setup() {
     const onCallbackClose = () => {
       isShow.value = false
     }
-    const isShow = ref(true)
+    const isShow = ref(false)
     const store = useStore()
     const { USER_ID } = toRefs(reactive(store.getters))
     const setUserId = () => {
       const d = parseInt(Math.random() * 10)
-      store.dispatch('USER/RUN_USER_ID', d)
+      store.dispatch('USER/RUN_ID', d)
     }
 
     return {

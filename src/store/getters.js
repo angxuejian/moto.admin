@@ -1,6 +1,7 @@
 
 export default {
-  USER_ID   : state => state.USER.ID,
+  USER_ID: state => state.USER.ID,
   USER_VCODE: state => state.USER.VCODE,
-  USER_MENU : state => state.LAYOUT.MENU,
+  LAYOUT_MENU: state => state.LAYOUT.MENU,
+  LAYOUT_IS_COLLAPSE: state => state.LAYOUT.IS_COLLAPSE,
 }

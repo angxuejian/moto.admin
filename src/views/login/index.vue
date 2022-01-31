@@ -10,7 +10,7 @@
 <script>
 import { setToken } from '@/utils/cookie'
 export default {
-  name   : 'Lonin',
+  name: 'Lonin',
   methods: {
     gotoHome: function() {
       setToken('123456')

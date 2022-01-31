@@ -2,7 +2,10 @@
   <div class="layout">
     <div class="navbar"><MENU /></div>
     <div class="body">
-      <div class="breadcrumb"><BREADCRUMB /></div>
+      <div class="breadcrumb">
+        <el-icon @click="switchSilde" style="margin-bottom: 2px;margin-right: 20px;"><component :is='icon' style="width: 1.2em;height: 1.2em; cursor: pointer;"  /></el-icon>
+        <BREADCRUMB />
+      </div>
 
       <div class="main">
         <router-view />
@@ -12,49 +15,59 @@
 </template>
 
 <script>
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineAsyncComponent, watch, defineComponent, toRefs, ref, reactive } from 'vue'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'LayoutIndex',
 
   components: {
-    MENU      : defineAsyncComponent(() => import('./components/menu')),
+    MENU: defineAsyncComponent(() => import('./components/menu')),
     BREADCRUMB: defineAsyncComponent(() => import('./components/breadcrumb')),
   },
   setup() {
-    return {}
+    const icon = ref('expand')
+
+    const store = useStore()
+    const { LAYOUT_IS_COLLAPSE } = toRefs(reactive(store.getters))
+    watch(LAYOUT_IS_COLLAPSE, () => { icon.value = LAYOUT_IS_COLLAPSE.value ? 'fold' : 'expand' })
+
+    const switchSilde = () => store.dispatch('LAYOUT/RUN_COLLAPSE')
+
+    return { icon, switchSilde }
   },
 })
 </script>
 
+<style lang="scss">
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 170px;
+}
+.el-menu-vertical-demo {
+  height: 100%;
+}
+</style>
 <style lang="scss" scoped>
 .layout {
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
   .navbar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 12%;
     height: 100%;
   }
   .body {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 88%;
+    width: 100%;
     height: 100%;
     .breadcrumb {
       width: 99%;
+      background: #fff;
       height: 7%;
-      position: static;
-      top: 0;
-      left: 0;
       display: flex;
       align-items: center;
       padding-left: 1%;
     }
     .main {
       width: 100%;
-      height: 100%;
-      background: #f5f5f5;
+      height: 93%;
     }
   }
 }
