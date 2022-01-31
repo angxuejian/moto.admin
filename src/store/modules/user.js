@@ -1,4 +1,4 @@
-import { setUserVCode, getUserVCode } from '@/utils/storage'
+// import { setUserVCode, getUserVCode } from '@/utils/storage'
 import store from '../index'
 export default {
   namespaced: true,
@@ -19,6 +19,7 @@ export default {
     RUN_VCODE: function(context) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
+          // 这里获取用户权限
           const USER_VCODE = ['home', 'xx', 'user2']
           context.commit('SET_VCODE', USER_VCODE)
           store.dispatch('LAYOUT/RUN_MENU', USER_VCODE)

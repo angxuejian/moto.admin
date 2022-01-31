@@ -1,6 +1,6 @@
 <template>
     <el-menu
-        default-active="/home"
+        :default-active="defaultActive"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
@@ -12,9 +12,9 @@
 </template>
 
 <script>
-// import { defineAsyncComponent } from 'vue'
 import { defineAsyncComponent, toRefs, reactive } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Menu',
   components: {
@@ -26,24 +26,11 @@ export default {
     const handleOpen = () => {}
 
     const store = useStore()
+    const router = useRouter()
     const { LAYOUT_MENU, LAYOUT_IS_COLLAPSE } = toRefs(reactive(store.getters))
+    const { defaultActive } = toRefs(reactive({ defaultActive: router.currentRoute.value.path }))
 
-    return { LAYOUT_MENU, LAYOUT_IS_COLLAPSE, handleOpen, handleClose }
+    return { defaultActive, LAYOUT_MENU, LAYOUT_IS_COLLAPSE, handleOpen, handleClose }
   },
-  // computed: {
-  //   menuBar() {
-  //     return this.$store.getters.LAYOUT_MENU
-  //   },
-  // },
-  // created () {
-  // },
-  // methods: {
-  //   handleClose: function() {
-
-  //   },
-  //   handleOpen: function() {
-
-  //   },
-  // },
 }
 </script>

@@ -11,7 +11,6 @@ router.beforeEach(async (to, from, next) => {
   document.title = `${setting.name} - ${to.meta.title}`
   const token = getToken()
   NProgress.start()
-  console.log(router.getRoutes())
   if (token) {
     if (to.path === '/login') next('/') // 有token，去首页
     else {

@@ -47,18 +47,6 @@ export const setRouterUrl = (menu = [], parentPath = '') => {
  * 拼接方法
  */
 const joinUrl = (path, parentPath) => {
-  console.log(path, parentPath, '--->')
   // return !parentPath || parentPath === '/' ? path : [parentPath, path].join('')
   return path.startsWith('/') ? path : path ? [parentPath, path].join('') : parentPath
 }
-
-// export const addAsyncRouter = (router, context, path = '') => {
-//   router.forEach(item => {
-//     if (item.children && item.children.length) {
-//       addAsyncRouter(item.children, context, item.path)
-//     }
-
-//     if (path) context.addRoute(path, item)
-//     else context.addRoute(item)
-//   })
-// }
