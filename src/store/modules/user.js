@@ -1,5 +1,7 @@
 import { setUserVCode, getUserVCode, setUserMune, getUserMune } from '@/utils/storage'
-import { ALL_MENU } from '@/router/menu'
+import asyncRouter from '@/router/asyncRouter'
+import defaultRouter from '@/router/defaultRouter'
+import router from '@/router'
 
 /**
  * getUserMenuBar
@@ -22,6 +24,36 @@ const getUserMenuBar = (code, menu) => {
 
   return list
 }
+
+/**
+ * 拼接方法
+ */
+const joinUrl = (path, parentPath) => {
+  return path.startsWith('/') ? path : path ? [parentPath, path].join('') : parentPath
+}
+
+/**
+ * 循环路由菜单，拼接 path地址
+ * @param {*} menu 菜单路由
+ * @param {*} parentPath 上级 path
+ * @returns 拼接完成path路由菜单
+ *
+ * 为了直接使用 element中的menu组件，而拼接 path地址
+ */
+const setRouterUrl = (menu = [], parentPath = '') => {
+  const list = []
+
+  menu.forEach(item => {
+    if (!item.hidden) {
+      if (!item.meta) item.meta = {}
+      item.meta.url = joinUrl(item.path, parentPath)
+      if (item.children && item.children.length) item.children = setRouterUrl(item.children, item.meta.url)
+      list.push(item)
+    }
+  })
+
+  return list
+}
 export default {
   namespaced: true,
 
@@ -32,8 +64,9 @@ export default {
   },
   mutations: {
     SET_USER_ID   : (state, id) => { state.ID = id },
-    SET_USER_VCODE: (state, vcode) => { state.VCODE = vcode; setUserVCode(vcode) },
-    SET_USER_MENU : (state, menu) => { state.MENU = menu; setUserMune(menu) },
+    SET_USER_VCODE: (state, vcode) => { state.VCODE = vcode }, // setUserVCode(vcode) },
+    SET_USER_MENU : (state, menu) => { state.MENU = menu }, // setUserMune(menu) },
+
   },
   actions: {
     RUN_USER_ID: function(context, ID) {
@@ -50,7 +83,8 @@ export default {
       })
     },
     RUN_USER_MENU: function(context, vcode) {
-      context.commit('SET_USER_MENU', getUserMenuBar(vcode, ALL_MENU))
+      getUserMenuBar(vcode, asyncRouter).forEach(r => router.addRoute(r))
+      context.commit('SET_USER_MENU', setRouterUrl([...defaultRouter, ...asyncRouter]))
     },
   },
 }

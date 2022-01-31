@@ -28,9 +28,6 @@ export default defineComponent({
   setup() {
     const onCallbackClose = () => {
       isShow.value = false
-      setTimeout(() => {
-        isShow.value = true
-      }, 2000)
     }
     const isShow = ref(true)
     const store = useStore()

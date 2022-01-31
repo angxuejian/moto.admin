@@ -1,9 +1,10 @@
 <template>
     <el-menu
-        default-active="onlyItem.name"
+        default-active="/home"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
+        router
     >
     <item-menu v-for="(item, index) in menuBar" :key="index" :item='item' />
     </el-menu>

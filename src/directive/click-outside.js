@@ -1,6 +1,6 @@
 
 const nodelist = []
-const ctx = '@@clickoutside'
+const ctx = '@@clickoutsideContext'
 
 let seed = 0
 

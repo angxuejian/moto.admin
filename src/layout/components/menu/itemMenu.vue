@@ -1,14 +1,14 @@
 <template>
-    <template v-if="item.meta && !item.meta.hidden">
-        <el-menu-item v-if="checkOnlyItem(item)" :index="onlyItem.name">
-            <el-icon><location /></el-icon>
+    <template v-if="!item.hidden">
+        <el-menu-item v-if="checkOnlyItem(item)" :index="onlyItem.meta.url">
+            <el-icon><component :is='onlyItem.meta.icon || "location"' /></el-icon>
             <span>{{ onlyItem.meta.title }}</span>
         </el-menu-item>
 
-        <el-sub-menu v-else :index="item.name">
+        <el-sub-menu v-else :index="item.meta.url">
             <template #title>
-                <el-icon><box /></el-icon>
-                <span>{{ item.meta.title }} </span>
+                <el-icon><folder /></el-icon>
+                <span>{{ item.meta.title }}</span>
             </template>
             <item-menu v-for="(s, i) in item.children" :key="i" :item="s" />
         </el-sub-menu>
