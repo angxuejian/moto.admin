@@ -20,22 +20,7 @@ const defaultRouter = [
         path: '/home',
         name: 'Home',
         meta: {
-          title: '首页1ss',
-          icon : 'sunset',
-        },
-        component: Home,
-      },
-    ],
-  },
-  {
-    path     : '/home22',
-    component: Layout,
-    children : [
-      {
-        path: '/home2222',
-        name: 'Home2',
-        meta: {
-          title: '首页=2ss',
+          title: '首页',
           icon : 'sunset',
         },
         component: Home,

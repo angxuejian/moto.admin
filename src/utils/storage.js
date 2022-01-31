@@ -9,10 +9,10 @@ export const getUserVCode = () => {
 export const remUserVCode = () => localStorage.removeItem(vcode)
 
 // 缓存用户路由菜单
-const mune = 'USER_MUNE'
-export const setUserMune = value => localStorage.setItem(mune, JSON.stringify(value))
-export const getUserMune = () => {
+const mune = 'LAYOUT_MUNE'
+export const setLayoutMune = value => localStorage.setItem(mune, JSON.stringify(value))
+export const getLayoutMune = () => {
   const d = localStorage.getItem(mune)
   return d ? JSON.parse(d) : []
 }
-export const remUserMune = () => localStorage.removeItem(mune)
+export const remLayoutMune = () => localStorage.removeItem(mune)

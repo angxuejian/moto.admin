@@ -3,7 +3,7 @@ import store from './store'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'  // 导航颜色 #29d
 import { getToken, remToken } from '@/utils/cookie'
-import { remUserVCode, remUserMune } from '@/utils/storage'
+import { remUserVCode, remLayoutMune } from '@/utils/storage'
 NProgress.configure({ showSpinner: false }) // 进度条配置
 const setting = require('./setting')
 
@@ -28,7 +28,7 @@ router.beforeEach(async (to, from, next) => {
         else {
           remToken()
           remUserVCode()
-          remUserMune()
+          remLayoutMune()
           next(`/login?redirect=${to.path}`) // 用户可访问路由为空，请重新登录
         }
       }

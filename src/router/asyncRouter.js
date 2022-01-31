@@ -2,21 +2,17 @@
 import Layout from '../layout/index'
 const asyncRouter = [
   {
-    path: '/only-page',
-    name: 'OnlyPage',
-    meta: {
-      title: '首页12',
-      icon : 'sunset',
-    },
+    path    : '/export',
+    name    : 'Export',
     children: [
       {
-        path: '/index1',
-        name: 'PageIndex',
+        path: '/file',
+        name: 'ExportFile',
         meta: {
-          title: '首页1',
-          icon : 'sunset',
+          title: '文件导出',
+          icon : 'files',
         },
-        component: () => import('@/views/only-page/index'),
+        component: () => import('@/views/export'),
       },
     ],
     component: Layout,
