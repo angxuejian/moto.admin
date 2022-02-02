@@ -5,6 +5,7 @@ import {
 import defaultRouter from './defaultRouter'
 /**
  * @params {string}   name       跳转路由地址名称
+ * @params {string}   redirect   重定向页面
  * @params {template} component  组件(父页面可使用Layout布局组件)
  * @params {array}    children   子组件列表
  * @params {boolean}  hidden     是否显示路由

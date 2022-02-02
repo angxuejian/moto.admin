@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent, toRefs, reactive } from 'vue'
+import { defineAsyncComponent, toRefs, ref, reactive, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
@@ -26,10 +26,11 @@ export default {
     const handleOpen = () => {}
 
     const store = useStore()
-    const router = useRouter()
+    const router = reactive(useRouter())
     const { LAYOUT_MENU, LAYOUT_IS_COLLAPSE } = toRefs(reactive(store.getters))
-    const { defaultActive } = toRefs(reactive({ defaultActive: router.currentRoute.value.path }))
+    const defaultActive = ref(router.currentRoute.path)
 
+    watch(router, () => { defaultActive.value = router.currentRoute.path })
     return { defaultActive, LAYOUT_MENU, LAYOUT_IS_COLLAPSE, handleOpen, handleClose }
   },
 }

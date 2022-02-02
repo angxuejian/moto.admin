@@ -41,6 +41,7 @@ export default defineComponent({
 <style lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 170px;
+  overflow: hidden;
 }
 .el-menu-vertical-demo {
   height: 100%;
