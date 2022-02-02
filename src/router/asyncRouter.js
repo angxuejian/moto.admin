@@ -4,6 +4,12 @@ const asyncRouter = [
   {
     path: '/export-manage',
     name: 'ExportManage',
+    meta: {
+      vcode: ['export-file'],
+      title: '导出管理',
+      icon: 'files',
+      component: 'layout/index',
+    },
     children: [
       {
         path: '/export-file',
@@ -11,8 +17,9 @@ const asyncRouter = [
         meta: {
           title: '文件导出',
           icon: 'files',
+          vcode: ['export-file'],
+          component: 'views/export/index',
         },
-        component: () => import('@/views/export/index'),
       },
     ],
     component: Layout,
@@ -23,8 +30,10 @@ const asyncRouter = [
     meta: {
       title: '测试管理',
       icon: 'files',
+      vcode: ['test2', 'test3'],
+      component: 'layout/index',
     },
-    redirect: '/test1',
+    redirect: '/test2',
     children: [
       {
         path: '/test1',
@@ -32,8 +41,9 @@ const asyncRouter = [
         meta: {
           title: '测试1',
           icon: 'files',
+          vcode: ['test1'],
+          component: 'views/test/test1',
         },
-        component: () => import('@/views/test/test1'),
       },
       {
         path: '/test2',
@@ -41,8 +51,9 @@ const asyncRouter = [
         meta: {
           title: '测试2',
           icon: 'files',
+          vcode: ['test2'],
+          component: 'views/test/test2',
         },
-        component: () => import('@/views/test/test2'),
       },
       {
         path: '/test3',
@@ -51,8 +62,9 @@ const asyncRouter = [
         meta: {
           title: '测试3',
           icon: 'files',
+          vcode: ['test3'],
+          component: 'views/test/test3',
         },
-        component: () => import('@/views/test/test3'),
         children: [
           {
             path: '/test31',
@@ -60,8 +72,8 @@ const asyncRouter = [
             meta: {
               title: '测试31',
               icon: 'files',
+              component: 'views/test/test3/test31',
             },
-            component: () => import('@/views/test/test3/test31'),
           },
           {
             path: '/test32',
@@ -69,8 +81,8 @@ const asyncRouter = [
             meta: {
               title: '测试32',
               icon: 'files',
+              component: 'views/test/test3/test32',
             },
-            component: () => import('@/views/test/test3/test32'),
           },
         ],
       },

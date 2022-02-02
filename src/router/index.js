@@ -13,7 +13,9 @@ import defaultRouter from './defaultRouter'
  * @params {string}   meta.title 菜单名称
  * @params {array}    meta.vcode 校验路由权限(Verification code)
  * @params {string}   meta.icon  菜单图标(https://element-plus.gitee.io/zh-CN/component/icon.html#%E5%9B%BE%E6%A0%87%E9%9B%86%E5%90%88)
- */
+ * @params {string}   meta.url   路由地址 - 全局跳转
+ * @params {string}   meta.component 组件地址，从缓存取出后，要重新引入组件
+*/
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: defaultRouter,

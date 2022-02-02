@@ -1,15 +1,15 @@
-// import { setUserVCode, getUserVCode } from '@/utils/storage'
+import { setUserVCode, getUserVCode } from '@/utils/storage'
 import store from '../index'
 export default {
   namespaced: true,
 
   state: {
     ID: '', // 用户ID
-    VCODE: [], // 用户登录后、获取可访问的路由地址的code码
+    VCODE: getUserVCode() || [], // 用户登录后、获取可访问的路由地址的code码
   },
   mutations: {
     SET_ID: (state, id) => { state.ID = id },
-    SET_VCODE: (state, vcode) => { state.VCODE = vcode },
+    SET_VCODE: (state, vcode) => { state.VCODE = vcode; setUserVCode(vcode) },
 
   },
   actions: {
@@ -20,7 +20,7 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           // 这里获取用户权限
-          const USER_VCODE = ['home', 'xx', 'user2']
+          const USER_VCODE = ['home', 'export-file', 'test2', 'test3']
           context.commit('SET_VCODE', USER_VCODE)
           store.dispatch('LAYOUT/RUN_MENU', USER_VCODE)
           resolve({ success: true })

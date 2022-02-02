@@ -1,8 +1,8 @@
-// import { setLayoutMune, getLayoutMune } from '@/utils/storage'
+import { setLayoutMune, getLayoutMune } from '@/utils/storage'
 import asyncRouter from '@/router/asyncRouter'
 import defaultRouter from '@/router/defaultRouter'
 import router from '@/router'
-import { getRouterMenu, setRouterUrl } from '@/utils/menu'
+import { getRouterMenu, setRouterUrl, setRouterComponent } from '@/utils/menu'
 export default {
   namespaced: true,
   state: {
@@ -15,11 +15,28 @@ export default {
   },
   actions: {
     RUN_MENU: function(context, vcode) {
-      getRouterMenu(vcode, asyncRouter).forEach(r => router.addRoute(r))
-      context.commit('SET_MENU', setRouterUrl([...defaultRouter, ...asyncRouter]))
+      const asyncVCodeRouter = getRouterMenu(vcode, asyncRouter)
+      asyncVCodeRouter.forEach(r => router.addRoute(r))
+
+      const menu = setRouterUrl([...defaultRouter, ...asyncVCodeRouter])
+      context.commit('SET_MENU', menu)
+      setLayoutMune({ asyncVCodeRouter, menu })
+
+      console.log('计算权限路由')
     },
     RUN_COLLAPSE: function(context) {
       context.commit('SET_COLLAPSE')
+    },
+    RUN_STORAGE_MENU: function(context) {
+      return new Promise((resolve) => {
+        const storageMenu = getLayoutMune()
+        setRouterComponent(storageMenu.asyncVCodeRouter).forEach(r => router.addRoute(r))
+
+        context.commit('SET_MENU', storageMenu.menu)
+        resolve({ success: true })
+
+        console.log('读取缓存路由----')
+      })
     },
   },
 }

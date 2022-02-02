@@ -13,6 +13,7 @@ export const getRouterMenu = (code, menu) => {
   menu.forEach(item => {
     if (verifyCode(code, item)) {
       if (item.children) item.children = getRouterMenu(code, item.children)
+      if (item.meta && item.meta.component) item.component = () => import('../' + item.meta.component)
       list.push(item)
     }
   })
@@ -49,4 +50,19 @@ export const setRouterUrl = (menu = [], parentPath = '') => {
 const joinUrl = (path, parentPath) => {
   // return !parentPath || parentPath === '/' ? path : [parentPath, path].join('')
   return path.startsWith('/') ? path : path ? [parentPath, path].join('') : parentPath
+}
+
+/**
+ * 引入路由组件地址
+ * @param {array} menu 本地缓存路由地址
+ * @returns 路由引入组件方法后的 路由地址
+ */
+export const setRouterComponent = (menu = []) => {
+  const list = []
+  menu.forEach(item => {
+    if (item.meta && item.meta.component) item.component = () => import('../' + item.meta.component)
+    if (item.children && item.children.length) item.children = setRouterComponent(item.children)
+    list.push(item)
+  })
+  return list
 }

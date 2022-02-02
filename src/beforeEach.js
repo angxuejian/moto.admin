@@ -16,6 +16,11 @@ router.beforeEach(async (to, from, next) => {
     else {
       const verifyCode = store.getters.USER_VCODE
       if (verifyCode.length) {
+        if (!store.getters.LAYOUT_MENU.length) {
+          await store.dispatch('LAYOUT/RUN_STORAGE_MENU') // 读取缓存路由
+          router.replace(to.path) // 重新刷新页面
+        }
+
         if (to.meta.vcode?.length) {
           const r = to.meta.vcode.find(s => verifyCode.includes(s))
           if (!r) next('/403') // 用户没有该路由权限，去403
