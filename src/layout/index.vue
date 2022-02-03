@@ -2,9 +2,13 @@
   <div class="layout">
     <div class="navbar"><MENU /></div>
     <div class="body">
-      <div class="breadcrumb">
-        <el-icon @click="switchSilde" style="margin-bottom: 2px;margin-right: 20px;"><component :is='icon' style="width: 1.2em;height: 1.2em; cursor: pointer;"  /></el-icon>
-        <BREADCRUMB />
+      <div class="historybar">
+        <div class="breadcrumb">
+          <el-icon @click="switchSilde" style="margin-bottom: 2px;margin-right: 20px;"><component :is='icon' style="width: 1.2em;height: 1.2em; cursor: pointer;"  /></el-icon>
+          <BREADCRUMB />
+        </div>
+        <div class="keep-view"><KEEPVIEW /></div>
+
       </div>
 
       <div class="main">
@@ -23,6 +27,7 @@ export default defineComponent({
   components: {
     MENU: defineAsyncComponent(() => import('./components/menu')),
     BREADCRUMB: defineAsyncComponent(() => import('./components/breadcrumb')),
+    KEEPVIEW: defineAsyncComponent(() => import('./components/keepView')),
   },
   setup() {
     const icon = ref('expand')
@@ -41,11 +46,9 @@ export default defineComponent({
 <style lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
-  // overflow: hidden;
 }
 .el-menu-vertical-demo {
   height: 100%;
-  // width: 170px;
 }
 </style>
 <style lang="scss" scoped>
@@ -59,17 +62,28 @@ export default defineComponent({
   .body {
     width: 100%;
     height: 100%;
-    .breadcrumb {
+    .historybar {
       width: 99%;
       background: #fff;
-      height: 7%;
-      display: flex;
-      align-items: center;
       padding-left: 1%;
+      height: 10%;
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%), 0 0 3px 0 rgb(0 0 0 / 4%);
+      .breadcrumb {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+      }
+      .keep-view {
+        width: 100%;
+        height: 40%;
+      }
     }
     .main {
-      width: 100%;
-      height: 93%;
+      width: 98%;
+      height: 90%;
+      box-sizing: border-box;
+      padding: 10px;
     }
   }
 }
