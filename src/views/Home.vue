@@ -1,10 +1,15 @@
 <template>
   <div class="home">
-    <!-- <mo-scrollbar  scroll-y class="scrollbar">
+    <mo-scrollbar>
       <div ref='items' class="items">
-        <div class="item" v-for="(item, index) in 50" :key="index"> {{ index + 1 }}</div>
+        <div class="item" v-for="(item, index) in 21" :key="index"> {{ index + 1 }}</div>
       </div>
-    </mo-scrollbar> -->
+    </mo-scrollbar>
+    <el-scrollbar>
+      <div ref='items' class="items">
+          <div class="item" v-for="(item, index) in 21" :key="index"> {{ index + 1 }}</div>
+        </div>
+    </el-scrollbar>
 
     <button @click="setUserId">修改用户ID</button>
     <div>这是用户 ----- {{USER_ID}}</div>
@@ -55,18 +60,18 @@ export default defineComponent({
   justify-content: center;
   height: 500px;
   width: 500px;
-}
-.scrollbar {
-  height: 100%;
-  width: 100%;
-  border: 1px solid red;
+  // background-color: red;
 }
 .items {
-  background: f5f5f5;
+  display: flex;
+  align-items: center;
+  width: 550px;
+  height: 550px;
+  // background-color: red;
   .item {
     display: block;
     text-align: center;
-    width: 100%;
+    width: 100px;
     height: 50px;
     line-height: 50px;
   }

@@ -78,10 +78,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$hover-bar: #c1c1c1;
+$hover-bar: rgba(0,0,0, 0.1);
 $hover-bc: #ededed;
 %axis-bar {
-  border-radius: 5px;
+  border-radius: 15px;
   transition: background 0.3s;
   background: transparent;
   position: absolute;
@@ -90,6 +90,9 @@ $hover-bc: #ededed;
 .mo-scrollbar {
   overflow: hidden;
   position: relative;
+  white-space: nowrap;
+  width: 100%;
+  height: 100%;
   &:hover,
   &:focus,
   &:active {
@@ -121,19 +124,11 @@ $hover-bc: #ededed;
     right: 0px;
     top: 2px;
     height: 100%;
-    width: 8px;
+    width: 6px;
     transition: width 0.3s;
     div {
       width: 100%;
-      @extend %axis-bar
-    }
-    &:hover,
-    &:focus,
-    &:active {
-      width: 15px;
-      div {
-        border-radius: 0 !important;
-      }
+      @extend %axis-bar;
     }
   }
 
@@ -142,19 +137,11 @@ $hover-bc: #ededed;
     width: 100%;
     left: 0px;
     bottom: 0px;
-    height: 8px;
+    height: 6px;
     transition: height 0.3s;
     div {
       height: 100%;
       @extend %axis-bar;
-    }
-    &:hover,
-    &:focus,
-    &:active {
-      height: 15px;
-      div {
-        border-radius: 0 !important;
-      }
     }
   }
 }

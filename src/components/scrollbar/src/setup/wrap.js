@@ -42,6 +42,7 @@ export default function useWrap(scrollY, scrollX, defau, axis) {
   // 计算滚动条的宽高
   const getWrapSize = () => {
     const { w, h } = getScrollbarSize(wrap.value)
+    console.log(w, h, '---<')
     axis.value.h = h
     axis.value.w = w
   }
