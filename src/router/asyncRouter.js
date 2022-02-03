@@ -30,7 +30,7 @@ const asyncRouter = [
     meta: {
       title: '测试管理',
       icon: 'files',
-      vcode: ['test2', 'test3'],
+      vcode: ['test2'],
       component: 'layout/index',
     },
     redirect: '/test1',

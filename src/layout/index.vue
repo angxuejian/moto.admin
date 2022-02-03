@@ -40,11 +40,12 @@ export default defineComponent({
 
 <style lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 170px;
-  overflow: hidden;
+  width: 200px;
+  // overflow: hidden;
 }
 .el-menu-vertical-demo {
   height: 100%;
+  // width: 170px;
 }
 </style>
 <style lang="scss" scoped>
