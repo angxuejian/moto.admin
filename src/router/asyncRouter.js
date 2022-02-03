@@ -33,7 +33,7 @@ const asyncRouter = [
       vcode: ['test2', 'test3'],
       component: 'layout/index',
     },
-    redirect: '/test2',
+    redirect: '/test1',
     children: [
       {
         path: '/test1',

@@ -12,7 +12,10 @@ export const getRouterMenu = (code, menu) => {
   }
   menu.forEach(item => {
     if (verifyCode(code, item)) {
-      if (item.children) item.children = getRouterMenu(code, item.children)
+      if (item.children) {
+        item.children = getRouterMenu(code, item.children)
+        item.redirect = item.children[0].path
+      }
       if (item.meta && item.meta.component) item.component = () => import('../' + item.meta.component)
       list.push(item)
     }
