@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <mo-scrollbar>
+    <!-- <mo-scrollbar>
       <div ref='items' class="items">
         <div class="item" v-for="(item, index) in 21" :key="index"> {{ index + 1 }}</div>
       </div>
-    </mo-scrollbar>
-    <el-scrollbar>
+    </mo-scrollbar> -->
+    <!-- <el-scrollbar>
       <div ref='items' class="items">
           <div class="item" v-for="(item, index) in 21" :key="index"> {{ index + 1 }}</div>
         </div>
-    </el-scrollbar>
+    </el-scrollbar> -->
 
     <button @click="setUserId">修改用户ID</button>
     <div>这是用户 ----- {{USER_ID}}</div>
@@ -58,8 +58,8 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 500px;
-  width: 500px;
+  // height: 500px;
+  // width: 500px;
   // background-color: red;
 }
 .items {
