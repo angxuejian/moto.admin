@@ -1,12 +1,12 @@
 <template>
-  <div class='mo-scrollbar'>
+  <div class="mo-scrollbar">
     <div
       :style="wrapStyle"
       ref='wrap'
       :class="[
       'mo-scrollbar__wrap',
       { 'mo-scrollbar__wrap-y': scrollY },
-      { 'mo-scrollbar__wrap-x': scrollX } ]"
+      { 'mo-scrollbar__wrap-x': scrollX }]"
       @scroll="getWrapDistance"
       >
       <!-- 包裹区域 -->
@@ -16,17 +16,17 @@
     </div>
 
     <!-- x/y 轴滚动条 -->
-    <div v-if="isScrollShow('scrollY')" @mousedown="clickScrollbarBc" data-type='y' ref="barbcy" class="mo-scrollbar__axis-y axis-bc-hover">
+    <div v-if="isScrollShow('scrollY')" @mousedown="clickScrollbarBc" data-type='y' ref="barbcy" :class="['mo-scrollbar__axis-y', { 'axis-bc-hover' : axis.h !== 100 }]">
       <div ref="bary" :style="`height: ${axis.h}%;transform: translateY(${axis.y}%)`"
-        class="axis-hover"
+        :class="{ 'axis-hover' : axis.h !== 100 }"
         data-type='y'
         @mousedown.stop='clickSlideScrollbar'
       ></div>
     </div>
 
-    <div v-if="isScrollShow('scrollX')" @mousedown="clickScrollbarBc" data-type='x' ref="barbcx" class="mo-scrollbar__axis-x axis-bc-hover">
+    <div v-if="isScrollShow('scrollX')" @mousedown="clickScrollbarBc" data-type='x' ref="barbcx" :class="['mo-scrollbar__axis-x', { 'axis-bc-hover' : axis.w !== 100 }]">
       <div ref="barx" :style="`width: ${axis.w}%;transform: translateX(${axis.x}%)`"
-        class="axis-hover"
+        :class="{ 'axis-hover' : axis.w !== 100 }"
         data-type='x'
         @mousedown.stop='clickSlideScrollbar'
       ></div>
