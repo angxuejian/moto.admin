@@ -21,6 +21,16 @@ const asyncRouter = [
           component: 'views/export/index',
         },
       },
+      {
+        path: '/export-test',
+        name: 'ExportTest',
+        hidden: true,
+        meta: {
+          title: '参数测试',
+          icon: 'files',
+          component: 'views/export/test',
+        },
+      },
     ],
     component: Layout,
   },

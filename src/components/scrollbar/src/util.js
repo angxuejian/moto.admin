@@ -5,7 +5,7 @@ export const getClientTop = (dom) => dom.getBoundingClientRect()
 // 要与原生滚动条的宽高一致、否则会出现滚动过多或过少
 export const getScrollbarSize = function(params) {
   const { clientHeight, scrollHeight, clientWidth, scrollWidth } = params
-  console.log(clientHeight, scrollHeight, clientWidth, scrollWidth, '--->')
+
   // 滚动条高度 = 盒子高度 / 盒子滚动区域高度 * 换算为百分比
   return {
     h: clientHeight / scrollHeight * 100,

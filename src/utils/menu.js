@@ -36,12 +36,12 @@ export const setRouterUrl = (menu = [], parentPath = '') => {
   const list = []
 
   menu.forEach(item => {
-    if (!item.hidden) {
-      if (!item.meta) item.meta = {}
-      item.meta.url = joinUrl(item.path, parentPath)
-      if (item.children && item.children.length) item.children = setRouterUrl(item.children, item.meta.url)
-      list.push(item)
-    }
+    // if (!item.hidden) {
+    if (!item.meta) item.meta = {}
+    item.meta.url = joinUrl(item.path, parentPath)
+    if (item.children && item.children.length) item.children = setRouterUrl(item.children, item.meta.url)
+    list.push(item)
+    // }
   })
 
   return list

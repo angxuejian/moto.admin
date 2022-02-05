@@ -3,19 +3,23 @@
     <div class="tags">
       <el-tag
         class="item-tag"
-        v-for="(item, index) in 10"
+        v-for="(item, index) in LAYOUT_KEEP_VIEW"
         :key="index"
         size="small"
-        effect="plain"
-        closable
-        >Tag 1</el-tag
+        :effect="name === item.name ? 'dark' : 'plain'"
+        :closable="item.name !== 'Home'"
+        @close.stop="closeTag(item)"
+        @click.stop="gotoTag(item.url)"
+        >{{ item.title }}</el-tag
       >
     </div>
   </mo-scrollbar>
 </template>
 
 <script>
-import { defineAsyncComponent, defineComponent, ref } from 'vue'
+import { defineAsyncComponent, defineComponent, ref,  reactive, watch, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 export default defineComponent({
   components: {
     moScrollbar: defineAsyncComponent(() =>
@@ -23,9 +27,34 @@ export default defineComponent({
     ),
   },
   setup() {
-    const tagArr = ref([])
+    const name = ref('')
+    const router = reactive(useRouter())
+    const store = reactive(useStore())
+    const { LAYOUT_KEEP_VIEW } = toRefs(reactive(store.getters))
 
-    return { tagArr }
+    const getKeepName = function() {
+      const paths = router.currentRoute.matched
+      const fullUrl = router.currentRoute.fullPath
+      const component = paths[paths.length - 1].components.default
+      const meta = paths[paths.length - 1].meta
+      if (component.name) {
+        name.value = component.name
+        store.dispatch('LAYOUT/ADD_KEEP_VIEW', {
+          name: component.name,
+          title: meta.title,
+          url: fullUrl || meta.url,
+        })
+      }
+    }
+    watch(router, getKeepName)
+
+    const closeTag = function(item) {
+      store.dispatch('LAYOUT/REM_KEEP_VIEW', item)
+    }
+    const gotoTag = function(url) {
+      router.push(url)
+    }
+    return { name, LAYOUT_KEEP_VIEW, closeTag, gotoTag }
   },
 })
 </script>
@@ -39,6 +68,7 @@ export default defineComponent({
       align-items: flex-start;
       .item-tag {
           margin-right: 10px;
+          cursor: pointer;
       }
   }
 

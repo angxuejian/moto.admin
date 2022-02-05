@@ -12,7 +12,11 @@
       </div>
 
       <div class="main">
-        <router-view />
+        <router-view v-slot='{ Component }'>
+          <keep-alive :include="keepView">
+            <component :is="Component"/>
+          </keep-alive>
+        </router-view>
       </div>
     </div>
   </div>
@@ -31,14 +35,16 @@ export default defineComponent({
   },
   setup() {
     const icon = ref('expand')
+    const keepView = ref([])
 
     const store = useStore()
-    const { LAYOUT_IS_COLLAPSE } = toRefs(reactive(store.getters))
+    const { LAYOUT_IS_COLLAPSE, LAYOUT_KEEP_VIEW } = toRefs(reactive(store.getters))
+
     watch(LAYOUT_IS_COLLAPSE, () => { icon.value = LAYOUT_IS_COLLAPSE.value ? 'fold' : 'expand' })
+    watch(LAYOUT_KEEP_VIEW, () => { keepView.value = LAYOUT_KEEP_VIEW.value.map(s => s.name) }, { deep: true })
 
     const switchSilde = () => store.dispatch('LAYOUT/RUN_COLLAPSE')
-
-    return { icon, switchSilde }
+    return { icon, switchSilde, keepView }
   },
 })
 </script>
