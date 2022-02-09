@@ -5,9 +5,9 @@ import PizZipUtils from 'pizzip/utils/index'
 import { saveAs } from 'file-saver'
 
 export default function(params) {
-  const { url, data, title = '导出文档' } = params
+  const { template, fileData, fileName = '导出文档' } = params
 
-  PizZipUtils.getBinaryContent(url, function(error, context) {
+  PizZipUtils.getBinaryContent(template, function(error, context) {
     if (error) throw error
 
     const imageOpts = {
@@ -38,13 +38,13 @@ export default function(params) {
     doc.attachModule(img)
     doc.compile()
 
-    doc.resolveData(data).then(() => {
+    doc.resolveData(fileData).then(() => {
       doc.render()
       const outWord = doc.getZip().generate({
         type: 'blob',
         mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       })
-      saveAs(outWord, `${title}.docx`)
+      saveAs(outWord, `${fileName}.docx`)
     })
   })
 }

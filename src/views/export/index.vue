@@ -1,45 +1,46 @@
 <template>
   <div>
+    <el-button @click="outputZip">zip压缩包导出</el-button>
     <el-button @click="outputWord">word模板导出</el-button>
   </div>
 </template>
 
 <script>
-import { ref, defineComponent, reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import exportWord from '@/utils/export-word'
+import { defineComponent } from 'vue'
+import exportWord from '@/export/export-word'
+import exportZip from '@/export/export-zip'
 export default defineComponent({
   name: 'ExportFile1',
   activated() {
   },
   setup() {
-    const a = ref(0)
-    const router = reactive(useRouter())
-    const setA = function() {
-      a.value = Math.random() * 10
-    }
-    const gotoTest = function() {
-      router.push({ name: 'ExportTest', query: { id: 456 } })
+    const d = new Date()
+    const year = d.getFullYear()
+    const month = d.getMonth() + 1
+    const date = d.getDate()
+    const nowTime = [year, month, date].join('-')
+
+    const outputZip = function() {
+      exportZip({
+        fileName: '2022 - 框出未来.txt',
+        fileData: `虎翼YYDS - ${nowTime}`,
+        zipName: '2022 - 框出未来',
+      })
     }
 
     const outputWord = function() {
-      const d = new Date()
-      const year = d.getFullYear()
-      const month = d.getMonth() + 1
-      const date = d.getDate()
-      const data = {
-        title: '2022 - 框出未来',
-        name: '虎翼',
-        date: [year, month, date].join('-'),
-        cover: '/cover.jpg',
-      }
       exportWord({
-        url: '/word-template.docx',
-        data,
-        title: '2022 - 框出未来',
+        template: '/word-template.docx',
+        fileName: '2022 - 框出未来',
+        fileData: {
+          title: '2022 - 框出未来',
+          name: '虎翼',
+          date: nowTime,
+          cover: '/cover.jpg',
+        },
       })
     }
-    return { a, setA, gotoTest, outputWord }
+    return { outputZip, outputWord }
   },
 })
 </script>
