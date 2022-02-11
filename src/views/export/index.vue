@@ -2,6 +2,7 @@
   <div>
     <el-button @click="outputZip">zip压缩包导出</el-button>
     <el-button @click="outputWord">word模板导出</el-button>
+    <el-button @click="outputExcel">excel模板导出</el-button>
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 import { defineComponent } from 'vue'
 import exportWord from '@/export/export-word'
 import exportZip from '@/export/export-zip'
+import exportExcel from '@/export/export-excel'
 export default defineComponent({
   name: 'ExportFile1',
   activated() {
@@ -40,7 +42,31 @@ export default defineComponent({
         },
       })
     }
-    return { outputZip, outputWord }
+
+    const outputExcel = function() {
+      exportExcel({
+        fileName: '2022 - 框出未来',
+        list: [
+          {
+            data: [
+              ['姓名', '年龄'],
+              ['张三', 20],
+              ['张三1', 21],
+            ],
+            title: '第一页',
+          },
+          {
+            data: [
+              ['性别', '出生地'],
+              ['男', '杭州'],
+              ['女', '北京'],
+            ],
+            title: '第二页',
+          },
+        ],
+      })
+    }
+    return { outputZip, outputWord, outputExcel }
   },
 })
 </script>
