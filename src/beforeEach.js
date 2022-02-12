@@ -8,7 +8,8 @@ NProgress.configure({ showSpinner: false }) // 进度条配置
 const setting = require('./setting')
 
 router.beforeEach(async (to, from, next) => {
-  document.title = `${setting.name} - ${to.meta.title}`
+  if (to.meta) document.title = to.meta.pageTitle || `${setting.name} - ${to.meta.title}`
+
   const token = getToken()
   NProgress.start()
   if (token) {

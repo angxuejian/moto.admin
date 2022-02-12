@@ -1,7 +1,7 @@
 import Login from '../views/login'
 import Home from '../views/Home.vue'
 import Layout from '../layout/index'
-
+import Pdf from '@/views/onlyPage/pdf'
 const defaultRouter = [
   {
     path: '/login',
@@ -26,6 +26,14 @@ const defaultRouter = [
         component: Home,
       },
     ],
+  },
+  {
+    path: '/pdf',
+    component: Pdf,
+    meta: {
+      title: 'PDF',
+      pageTitle: '2022 - 框出未来',
+    },
   },
   {
     path: '/403',

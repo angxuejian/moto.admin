@@ -3,6 +3,10 @@
     <el-button @click="outputZip">zip压缩包导出</el-button>
     <el-button @click="outputWord">word模板导出</el-button>
     <el-button @click="outputExcel">excel模板导出</el-button>
+    <hr>
+    <router-link to="/pdf">
+    <el-button>pdf导出</el-button>
+    </router-link>
   </div>
 </template>
 
@@ -22,19 +26,23 @@ export default defineComponent({
     const date = d.getDate()
     const nowTime = [year, month, date].join('-')
 
-    const outputZip = function() {
+    const outputZip = async function() {
+      const list = [
+        await outputWord('blob'),
+        outputExcel('blob'),
+      ]
       exportZip({
-        fileName: '2022 - 框出未来.txt',
-        fileData: `虎翼YYDS - ${nowTime}`,
-        zipName: '2022 - 框出未来',
+        list,
+        fileName: '2022 - 框出未来',
       })
     }
 
-    const outputWord = function() {
-      exportWord({
+    const outputWord = function(t) {
+      return exportWord({
+        type: t,
         template: '/word-template.docx',
         fileName: '2022 - 框出未来',
-        fileData: {
+        data: {
           title: '2022 - 框出未来',
           name: '虎翼',
           date: nowTime,
@@ -43,8 +51,9 @@ export default defineComponent({
       })
     }
 
-    const outputExcel = function() {
-      exportExcel({
+    const outputExcel = function(t) {
+      return exportExcel({
+        type: t,
         fileName: '2022 - 框出未来',
         list: [
           {

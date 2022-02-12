@@ -1,14 +1,30 @@
 import XLSX from 'xlsx'
-// import { saveAs } from 'file-saver'
-// import JsZip from 'jszip'
-// function s2ab(s) {
-//   var buf = new ArrayBuffer(s.length)
-//   var view = new Uint8Array(buf)
-//   for (var i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF
-//   return buf
-// }
+
+/**
+ * 导出excel表格
+ * @param {object} params
+ * @param {array}  param.list 数据
+ * @param {string} param.fileName 导出的文件名称
+ * @param {string} param.type 导出类型; 仅支持 'xlsx' 和 'blob' 类型; 默认 'xlsx' 类型
+ * @example
+ * exportExcel({
+ *   fileName: '2022 - 框出未来',
+ *   list: [
+ *     {
+ *       title: 'sheet1',
+ *       data: [
+ *         ['姓名', '年龄'],
+ *         ['张三', 20],
+ *         ['李四', 21],
+ *       ]
+ *     },
+ *     ...
+ *   ]
+ * })
+ */
 export default function(params = {}) {
-  const { list = [], fileName = '' } = params
+  const { list = [], type = 'xlsx' } = params
+  const fileName = `${params.fileName}.xlsx`
   const workbook = XLSX.utils.book_new()
 
   list.forEach(item => {
@@ -16,20 +32,11 @@ export default function(params = {}) {
     XLSX.utils.book_append_sheet(workbook, workSheet, item.title)
   })
 
-  XLSX.writeFile(workbook, `${fileName}.xlsx`)
-
-  // 转换为 Blob数据，saveAs 导出文件
-  // const wbout = XLSX.write(workbook, {
-  //   bookType: 'xlsx',
-  //   bookSST: false,
-  //   type: 'binary',
-  // })
-  // const blobWb = new Blob([s2ab(wbout)], { type: 'application/octet-stream' })
-  // saveAs(blobWb, `${fileName}.xlsx`)
-
-  // 将转换为 Blob数据的excel文件，放入 zip中导出
-  // const zip = new JsZip()
-  // zip.file(blobWb)
-  // const result = await zip.generateAsync({ type: 'blob' })
-  // saveAs(result, `${fileName}.zip`)
+  if (type !== 'blob') XLSX.writeFile(workbook, fileName)
+  else {
+    // 导出blob 对象, 结合jszip, 导出多个文件的压缩包
+    const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const fileData = new Blob([wbout], { type: 'application/octet-stream' })
+    return { fileName, fileData }
+  }
 }
