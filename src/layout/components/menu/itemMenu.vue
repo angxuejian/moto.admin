@@ -31,9 +31,9 @@ export default {
     const onlyItem = ref({})
 
     const checkOnlyItem = (item) => {
-      const child = item.children
-      const isOnly =
-                !child || (child && child.length === 1 && !child[0].children)
+      item.children = item.children || []
+      const child = item.children.filter(f => !f.hidden)
+      const isOnly = !child || (child && child.length === 1 && !child[0].children)
       if (isOnly) onlyItem.value = child ? child[0] : item
 
       return isOnly

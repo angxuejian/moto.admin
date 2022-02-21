@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent, defineComponent, ref,  reactive, watch, toRefs } from 'vue'
+import { defineAsyncComponent, defineComponent, ref,  reactive, watch, toRefs, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 export default defineComponent({
@@ -37,7 +37,8 @@ export default defineComponent({
       const fullUrl = router.currentRoute.fullPath
       const component = paths[paths.length - 1].components.default
       const meta = paths[paths.length - 1].meta
-      if (component.name) {
+
+      if (component.name && (meta && !meta.hidden)) {
         name.value = component.name
         store.dispatch('LAYOUT/ADD_KEEP_VIEW', {
           name: component.name,
@@ -47,6 +48,7 @@ export default defineComponent({
       }
     }
     watch(router, getKeepName)
+    onMounted(() => getKeepName())
 
     const closeTag = function(item) {
       store.dispatch('LAYOUT/REM_KEEP_VIEW', item)

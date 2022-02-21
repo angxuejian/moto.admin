@@ -4,7 +4,7 @@
     <el-button @click="outputWord">word模板导出</el-button>
     <el-button @click="outputExcel">excel模板导出</el-button>
     <hr>
-    <router-link to="/pdf">
+    <router-link to="/export-pdf">
     <el-button>pdf导出</el-button>
     </router-link>
   </div>

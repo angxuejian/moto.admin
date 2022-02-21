@@ -16,6 +16,7 @@ export const getRouterMenu = (code, menu) => {
         item.children = getRouterMenu(code, item.children)
         item.redirect = item.children[0].path
       }
+      if (item.meta) { item.meta.hidden = item.hidden || false }
       if (item.meta && item.meta.component) item.component = () => import('../' + item.meta.component)
       list.push(item)
     }
@@ -34,14 +35,11 @@ export const getRouterMenu = (code, menu) => {
  */
 export const setRouterUrl = (menu = [], parentPath = '') => {
   const list = []
-
   menu.forEach(item => {
-    // if (!item.hidden) {
     if (!item.meta) item.meta = {}
     item.meta.url = joinUrl(item.path, parentPath)
     if (item.children && item.children.length) item.children = setRouterUrl(item.children, item.meta.url)
     list.push(item)
-    // }
   })
 
   return list

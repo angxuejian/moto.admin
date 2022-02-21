@@ -8,8 +8,6 @@ NProgress.configure({ showSpinner: false }) // 进度条配置
 const setting = require('./setting')
 
 router.beforeEach(async (to, from, next) => {
-  if (to.meta) document.title = to.meta.pageTitle || `${setting.name} - ${to.meta.title}`
-
   const token = getToken()
   NProgress.start()
   if (token) {
@@ -44,6 +42,8 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') next() // 重定向后，显示页面
     else next(`/login?redirect=${to.path}`) // 没有token，去登录
   }
+
+  to.meta && (document.title = to.meta.pageTitle || `${setting.name} - ${to.meta.title}`)
 })
 
 router.afterEach(() => {
