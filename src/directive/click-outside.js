@@ -4,14 +4,19 @@ const ctx = '@@clickoutsideContext'
 
 let seed = 0
 
-window.addEventListener('click', listenerClick)
+document.addEventListener('click', listenerClick)
 
 function listenerClick(event) { nodelist.forEach(node => node[ctx].elHandler(event)) }
 
 function createElHandler(el, binding, vnode) {
   return function(click = {}) {
-    if (!click || !click.target || (el && el.contains(click.target))) return
-    el[ctx].vCallback && el[ctx].vCallback()
+    if (!vnode || !vnode.context || !click || !click.target || (el && el.contains(click.target))) return
+
+    if (binding.expression && el[ctx].vCallbackName && vnode.context[el[ctx].vCallbackName]) {
+      vnode.context[el[ctx].vCallbackName]()
+    } else {
+      el[ctx].vCallback && el[ctx].vCallback()
+    }
   }
 }
 
@@ -22,14 +27,16 @@ export default {
 
     el[ctx] = {
       id,
-      vCallback: binding.value,
+      vCallback: binding?.value,
+      vCallbackName: binding?.expression,
       elHandler: createElHandler(el, binding, vnode),
     }
   },
 
   updated(el, binding, vnode) {
+    el[ctx].vCallback = binding?.value
+    el[ctx].vCallbackName = binding?.expression
     el[ctx].elHandler = createElHandler(el, binding, vnode)
-    el[ctx].vCallback = binding.value
   },
 
   unmounted(el) {

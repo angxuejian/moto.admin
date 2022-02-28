@@ -17,7 +17,7 @@
     <!-- <div v-auth='"user"'>这是普通用户</div>
     <div v-auth='"admin"'>这是管理员-----</div> -->
     <!-- <router-link to="/user">去用户</router-link> -->
-    <div v-if="isShow" v-clickoutside='onCallbackClose' class="test">
+    <div v-clickoutside='onCallbackClose' class="test">
       测试 click outside
     </div>
   </div>
@@ -31,8 +31,10 @@ export default defineComponent({
   name: 'Home',
   directives: { Clickoutside },
   setup() {
+    const count = ref(0)
     const onCallbackClose = () => {
-      isShow.value = false
+      count.value++
+      console.log(count.value, '--》这是Value')
     }
     const isShow = ref(false)
     const store = useStore()
