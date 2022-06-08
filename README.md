@@ -1,3 +1,3 @@
-# moto.ui
-VUE的 UI / 工具示例库
+# moto.admin
+VUE的 后台功能示例库
 
